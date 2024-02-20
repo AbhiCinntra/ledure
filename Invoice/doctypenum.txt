@@ -1,0 +1,7 @@
+A/R Invoice -> 13
+A/R Credit Memo -> 14
+Incoming Payment -> 24
+
+A/P Invoice -> 18
+A/P Credit Memo -> 19
+Outgoing Payments -> 46

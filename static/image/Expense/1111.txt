@@ -1,0 +1,28 @@
+private void loadUnits() {
+
+       // EmployeeValue employeeValue = new EmployeeValue();
+      //  employeeValue.setSalesEmployeeCode(Globals.TeamSalesEmployeCode);
+        Call<UnitResponse> call = NewApiClient.getInstance().getApiService().getUnitList();
+        call.enqueue(new Callback<UnitResponse>() {
+            @Override
+            public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+//                if (response != null) {
+//                    if (response.body().getValue() != null && response.body().getValue().size() > 0)
+//                        SalesEmployeeList.setValue(filterlist(response.body().getValue()));
+//
+//                    //
+//                }
+
+                if (response != null) {
+                    if (response.body().getData() != null && response.body().getData().size() > 0)
+                        unitData.setValue(response.body().getData());
+
+                    //
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UnitResponse> call, Throwable t) {
+            }
+        });
+    }

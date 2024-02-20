@@ -1,0 +1,53 @@
+{
+    "Filter": "Group",
+    "Code" :"",
+    "Type": "Gross",
+    "FromDate": "",
+    "ToDate": "",
+    "PageNo": 1,
+    "MaxSize": "10"
+}
+
+
+{
+    "SearchText": "",
+    "FromDate": "",
+    "ToDate": "",
+}
+
+{
+    "SearchText": "",
+    "FromDate":"2023-04-01",
+    "ToDate":"2024-03-31",
+    "GroupCode": 1512,
+    "SubGroupCode": ""
+}
+
+{
+    "Filter": "Group",
+    "Code" :"",
+    "Type": "Gross",
+    "FromDate": "",
+    "ToDate": "",
+    "PageNo": 1,
+    "MaxSize": "10",
+    "SearchText": "",
+    "OrderByName": "z-a",
+    "OrderByAmt": "asc",
+    "OrderByName":"a-z",
+    "OrderByAmt":"asc" 
+}
+
+
+(a-z), (z-a), amount filter
+
+sales_ledger (group, zone, ledger, item_stock, stock_group)
+
+recept_ledger (group, zone, ledger)
+
+receiables_ledgers
+
+party_wiase
+
+
+

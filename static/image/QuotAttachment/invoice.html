@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>Invoice</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <style>
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+        
+        * {
+            font-size: 13px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .main-header {
+            background-color: #518DE3;
+            color: white;
+        }
+        
+        .main-header .content h4 {
+            padding-left: 10px;
+        }
+        
+        .main-header1 {
+            background-color: rgb(19, 19, 82);
+            color: white;
+            width: 100%;
+            display: flex;
+        }
+        
+        .content {
+            width: 80%;
+        }
+        
+        .bnk-dtl {
+            width: 19%;
+        }
+        
+        .second {
+            width: 100%;
+            display: flex;
+        }
+        
+        .left {
+            width: 70%;
+        }
+        
+        .right {
+            width: 29%;
+        }
+        
+        .right .quotaion-heading {
+            text-align: center;
+        }
+        
+        .right-tbl {
+            margin-top: 100px;
+        }
+        
+        .ftr1 {
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        #api2 tr td {
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .invoice {
+            background: #fff;
+            padding: 20px;
+            width: fit-content;
+            border: 2px solid #000;
+        }
+        
+        .invoice-company {
+            font-size: 20px;
+            font-weight: bold !important;
+        }
+        
+        .invoice-footer {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 10px
+        }
+        
+        .invoice-note {
+            color: #999;
+            margin-top: 80px;
+            font-size: 85%
+        }
+        
+        .invoice>div:not(.invoice-footer) {
+            margin-bottom: 10px
+        }
+        
+        .btn.btn-white,
+        .btn.btn-white.disabled,
+        .btn.btn-white.disabled:focus,
+        .btn.btn-white.disabled:hover,
+        .btn.btn-white[disabled],
+        .btn.btn-white[disabled]:focus,
+        .btn.btn-white[disabled]:hover {
+            color: #2d353c;
+            background: #fff;
+            border-color: #d9dfe3;
+        }
+        
+        table,
+        th,
+        td {
+            border: 2px solid #000;
+            border-collapse: collapse;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        .box {
+            margin: 0 10%;
+        }
+        
+        .logo-img {
+            width: 185px
+        }
+        
+        @media screen and(max-width: 600px) {
+            #res1des {
+                font-size: 10px;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                font-size: 13px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            body {
+                background-color: white;
+            }
+            .box {
+                width: 100vw;
+            }
+            .invoice-price .invoice-price-left,
+            .invoice-price .invoice-price-right {
+                padding: 0;
+                font-size: 0;
+            }
+            .invoice-price .invoice-price-right {
+                font-size: 5px;
+                text-align: center;
+            }
+            .box {
+                margin: 0;
+            }
+            .second .left {
+                width: 45%;
+            }
+            .second .right {
+                width: 55%;
+            }
+            .right .quotaion-heading {
+                padding-left: 20px;
+            }
+            .logo-img {
+                width: 100px
+            }
+            .gst {
+                font-size: 12px;
+                margin-top: 50px !important;
+            }
+            .table-responsive {
+                overflow: scroll;
+            }
+            .ftr1 {
+                text-align: center;
+                font-weight: 600;
+            }
+            .ftr1 span {
+                font-size: 10px;
+            }
+            .right-tbl {
+                margin-left: 10px;
+                margin-top: 56px;
+            }
+            .text-right {
+                font-size: 11px;
+            }
+            .test1 {
+                font-size: 13px;
+            }
+            .content {
+                height: 30px;
+                padding-top: 10px;
+                padding-bottom: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="invoice">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <div class="container box">
+            <div class="col-md-12">
+                <div class="invoice">
+                    <!-- begin invoice-company -->
+                    <div class="invoice-company text-inverse f-w-600">
+                        <span class="pull-right hidden-print ">
+                                <!-- <button class="waves-effect waves-light" onclick="generatePDF()">Download</button> -->
+                                <!-- <a href="javascript:;" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a> -->
+                                    <!-- <a href="javascript:;" onclick="myFunction()" class="btn btn-sm btn-white m-b-10 p-l-5 right-print1" style="background-color:#fff;color:black; border-radius: 4px;padding: 10px;text-decoration: none;"> <i class="fa fa-print t-plus-1 fa-fw fa-lg"></i>
+                                    Print</a> -->
+                                    <a href="javascript:;" onclick="generatePDF()"
+                            class="btn btn-sm btn-white m-b-10 p-l-5 right-print1"
+                            style="background-color:#fff;color:black; border-radius: 4px;padding: 10px;text-decoration: none;"><i
+                                class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Download</a>
+                                <button onclick="Export2Doc(&#39;invoice&#39;);">Export as .doc</button>
+                            </span> Invoice
+                    </div>
+                    <!-- end invoice-company -->
+
+                    <!-- begin invoice-header -->
+                    <div class="main-header">
+                        <div class="content">
+                            <h4 style="display: inline-block;">Invoice :</h4>
+                            <h5 id="qtp" style="display: inline-block;"></h5>
+                        </div>
+                    </div>
+
+                    <div class="second">
+
+                        <!-- <div class="left">
+                            <div class="log1"></div>
+                            <h4>Hospitality and Kitchen Solution</h4>
+                            <div class="addrs k">
+                                <p>B-56 First floor, Naraina Industrial Area,<br> Phase 2,New Delhi - 110028</p>
+                            </div>
+
+                            <div class="mail k">
+                                <p>
+                                    Email: info@haks.co.in, www.haks.co.in</p>
+                            </div>
+                            <div class="tel k">
+                                <p>
+                                    Tel: 011-40044667, 9599562332, 9250169404</p>
+                            </div>
+                            <div class="gst k">
+                                <h4>GSTIN :-07AALFH1651F1ZJ</h4>
+                            </div>
+
+
+                        </div> -->
+
+                        <div class="left">
+                            <div class="log1">
+                            </div>
+                            <div class="addrs k">
+                                <p> <span style="font-size:14px; font-weight:bold"> Hospitality and Kitchen Solution</span> <br> B-56 First floor, Naraina Industrial Area,<br> Phase 2,New Delhi - 110028 <br> <span style="font-weight:bold">Email:</span> info@haks.co.in,
+                                    www.haks.co.in <br> <span style="font-weight:bold">Tel:</span> 011-40044667, 9599562332 , 9250169404 <br>
+                                    <span style="font-size:14px; font-weight:bold">GSTIN :-07AALFH1651F1ZJ</p>
+                            </div>
+                        </div>
+
+                        <!-- <div class="right">
+                            <div class="quotaion-heading">
+                                <img src="http://103.107.67.186:8053/static/html/hakslogo.png" style="max-width:250px; width:80%;" alt="HAKS-LOGO"> </div>
+                            <div class="right-tbl" style="margin-top:30px">
+                                <table style="width:100%;" border="1">
+                                    <tr>
+                                        <th>Date:</th>
+                                        <td id="disp_date" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Invoice No.:</th>
+                                        <td id="disp_qut"></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                        </div> -->
+
+                        <div class="right">
+                            <div class="quotaion-heading">
+
+                                <img src="http://103.107.67.186:8053/static/html/hakslogo.png" style="max-width:250px; width:80%;" alt="HAKS-LOGO">
+                            </div>
+                            <!-- <div class="right-tbl" style="margin-top:30px"> -->
+                            <div style="text-align: -webkit-center;">
+                                <table style="width:100%;" border="1">
+                                    <tr>
+                                        <th>Date:</th>
+                                        <td id="disp_date" value=""></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Order No.:</th>
+                                        <td id="disp_qut"></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- begin invoice-content -->
+                    <div class="invoice-content">
+                        <!-- begin table-responsive -->
+                        <div class="table-responsive">
+                            <!-- first-table-with-image-begin---------------------------------------- -->
+                            <table class="table table-invoice" width="100%">
+                                <tr style="background-color: #518DE3;color: white;">
+                                    <th class="text-center cust_box" width="25%" colspan="5">Customer</th>
+                                    <th class="text-right" colspan="3">Our Bank Details</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center pd cust_box" width="25%" colspan="5">
+                                        <span style="font-weight: bold;font-size: 14px;">Kind
+                                                                                        Attention:
+                                            </span>
+                                    <span id="kind_atn" style="text-transform: capitalize;"></span>
+                                    <br>
+                                    <span style="font-weight: bold;font-size: 14px;">Address:</span>
+                                    <span id="addre" style="text-transform: capitalize;"></span>
+                                    <br>
+                                    <span style="font-weight: bold;font-size: 14px;">
+                                                Email id:
+                                            </span>
+                                    <span id="eml" style="color:blue; text-decoration: underline;"></span>
+                                    </td>
+
+
+                                    <td class="text-right" colspan="3">
+                                        <span>Name:-HAKS</span><br>
+                                        <span>Bank Name:-YES Bank</span>
+                                        <span>Account Number:-11111111111</span> <br>
+                                        <span>IFSC Code:-YESB0000184</span>
+                                    </td>
+                                    </tr>
+
+
+                                    <tr style="background-color: #518DE3;color:white;">
+                                        <th class="text-center" width="25%" style="width:6px;">S.No</th>
+                                        <th class="text-center" width="25%" style="min-width: 75px;">Name</th>
+                                        <th class="text-center" width="25%" style="min-width: 175px;">Description</th>
+                                        <th class="text-center prd_img" style="display: none;">Image</th>
+                                        <th class="text-center" width="5%">Qty</th>
+                                        <!-- <th class="text-right" width="20%">Indicative Image</th> -->
+                                        <!-- <th class="text-right" width="20%">Description</th> -->
+                                        <th class="text-right" width="20%">HSN CODE</th>
+                                        <th class="text-right" width="20%">Tax(GST)</th>
+                                        <th class="text-right" width="10%">Rate</th>
+                                        <th class="text-right" width="15%">Amount(&#x20B9;)</th>
+                                        <!-- <th class="text-right" width="15%">Tax Amt(&#x20B9;)</th> -->
+                                        <!-- <th class="text-right" width="25%">Total Amount(&#x20B9;) </th> -->
+                                    </tr>
+
+                                    <!----end Invoice header ----------------------------->
+
+                                    <tbody id="api1"></tbody>
+
+                                    <!--begin Terms and condition---------------------------->
+                                    <tr style="background-color: #518DE3;color: white;">
+                                        <th class="text-center term_cond" width="25%" colspan="8">Terms and Conditions*</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="test1 term_cond" colspan="8"></td>
+                                    </tr>
+                                    <!--end Terms and condition---------------------------->
+
+                                    <!--begin authorized signatory---------------------------->
+                                    <tr>
+                                        <td class="text-right specification" colspan="6">
+                                            <p class="specification" style="font-size:10px;">
+                                                <span style="font-weight:bold">
+                                        Specification :</span> In line with our continual improvement, we reserve the right to modify the design and change the specification of any material, if in our opinion,
+                                                such modifications constitute an improvement or is in accordance with revised standards of manufacturing methods. Therefore the specifications, illustrations, dimensions and weights given or agreed to by
+                                                us in our proposal, catalogues, drawings, photographs etc. are not binding in detail.</p>
+                                        </td>
+                                        <td class="text-right" colspan="2">
+                                            <p>For HAKS</p>
+                                            image
+                                            <p>Authorised signatory</p>
+
+                                        </td>
+
+                                    </tr>
+                                    <!--end authorized signatory ---------------------------->
+
+                                    <!-- begin invoice-footer -->
+                                    <tr>
+                                        <td class="text-right ftr1 footerfinal" colspan="8">
+                                            <span>If you have any questions concerning this quote, contact
+                                </span><br>
+                                            <span>
+                                    [HAKS, 9599562332]</span>
+
+                                        </td>
+                                    </tr>
+                                    </table>
+                                    <!-- first-table-with-image-end---------------------------------------- -->
+                            </div>
+                        </div>
+
+                        <div class="invoice-footer">
+                            <p class="text-center m-b-5" style="font-size:11px; font-weight:500">
+                                THANK YOU FOR YOUR BUSINESS!
+                            </p>
+                            <p class="text-center">
+                                <span class="m-r-10" style="font-size:11px; font-weight:500">
+                        <i class="fa fa-fw fa-lg fa-globe"></i>
+                        matiasgallipoli.com</span>
+                                <span class="m-r-10" style="font-size:11px; font-weight:500">
+                        <i class="fa fa-fw fa-lg fa-phone-volume"></i>
+                        T:016-18192302</span>
+                                <span class="m-r-10" style="font-size:11px; font-weight:500">
+                        <i class="fa fa-fw fa-lg fa-envelope"></i>
+                        rtiemps@gmail.com</span>
+                            </p>
+                        </div>
+                        <!-- end invoice-footer -->
+                    </div>
+</body>
+
+</html>
+</div>
+</div>
+<script>
+    var str = window.location.href;
+
+    var currentId = str.substring(str.indexOf('?id=') + 4);
+
+    var settings = {
+        "url": "http://103.107.67.186:8053/invoice/one",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "id": currentId
+        })
+    };
+    $.ajax(settings).done(function(response) {
+        var current_yr = response.data[0].CreateDate.substring(2, 4);
+        var nxt_yr = parseInt(response.data[0].CreateDate.substring(0, 2));
+        $("#disp_date").html(response.data[0].CreateDate);
+        $("#disp_qut").html("HK-" + (
+            response.data[0].id
+        ) + current_yr + '-' + nxt_yr + (parseInt(nxt_yr) + 1));
+        $("#qtp").html("HK-" + (
+            response.data[0].id
+        ) + current_yr + '-' + nxt_yr + (parseInt(nxt_yr) + 1));
+        var tc2 = response.data[0].TC;
+        messagetoSend = tc2.replace("\n", "</br>");
+        messagetoSend2 = messagetoSend.replace(" \n", "</br>");
+        messagetoSend3 = messagetoSend2.replace("\n", "</br>");
+        messagetoSend4 = messagetoSend3.replace("\n", "</br>");
+        $(".test1").html(messagetoSend4);
+        $("#eml").html(response.data[0].BPEmail);
+        var img_res = (response.data[0].IMG.toLowerCase());
+        var text = "";
+        var img_link = (img_res == 'no' ? '' : 'http://103.107.67.186:8053/static/html/hakslogo.png');
+        let i = 1;
+        var tot_amt = tot_gst = dis_percent = 0;
+        var installation = (response.data[0].Installation) + ((response.data[0].Installation) * 0.18);
+        var insurance = (response.data[0].Insurance) + ((response.data[0].Insurance) * 0.18);
+        var packing = (response.data[0].Packing) + ((response.data[0].Packing) * 0.18);
+        dis_percent = response.data[0].DiscountPercent;
+        var shipping = ((response.data[0].ShippingAndHandling != "" && response.data[0].ShippingAndHandling != NaN && response.data[0].ShippingAndHandling > 0) && (response.data[0].ShippingText != "" && response.data[0].ShippingText > 0 && response.data[0].ShippingText != NaN)) ? parseInt(response.data[0].ShippingAndHandling) + parseInt((response.data[0].ShippingAndHandling) * ((response.data[0].ShippingText) / 100)) : 0;
+        $.each(response.data[0].DocumentLines, function(key, val) {
+            text += '<tr>';
+            var res1 = val.ItemDescription.replaceAll('•', '/•').split("/").join("<br>")
+            if (val.OR == '1' && val.Title == "") {
+                text += '<tr style="background-color:#518DE3; opacity:0.7">';
+                text += '<td colspan="9" style="text-align:center; color:white; font-weight:bold;">' + "OR" + '</td>';
+                text += '</tr>';
+            }
+            if (val.OR == '0' && val.Title != "") {
+                text += '<tr style="background-color:#518DE3; opacity:0.7">';
+                text += '<td colspan="9" style="text-align:center; color:white; font-weight:bold;">' + val.Title + '</td>';
+                text += '</tr>';
+            }
+            text += '<td id="res1des">' + i + '</td>';
+            text += '<td id="res1des">' + val.ItemName + '</td>';
+            text += '<td id="res1des">' + res1 + '</td>';
+            if (img_res != 'no') {
+                $('.prd_img').removeClass('d-none');
+                $('.prd_img').removeAttr('style');
+                text += '<td id="res1des">' + "<img src=" + img_link + " width=" + 100 + ">" + '</td>';
+                $(".specification").attr("colspan", "5");
+                $(".cust_box").attr("colspan", "6");
+                $(".term_cond").attr("colspan", "9");
+                $(".specification").attr("colspan", "7");
+                $(".footerfinal").attr("colspan", "9");
+            }
+            text += '<td id="res1des">' + val.Quantity + '</td>';
+            // text += '<td>' + "Best Square Table" + '</td>';
+            text += '<td id="res1des">' + "123" + '</td>';
+            text += '<td id="res1des">' + (
+                val.TaxCode * 100
+            ) + ' % ' + '</td>';
+            text += '<td id="res1des">' + val.UnitPrice + '</td>';
+            text += '<td id="res1des">' + (
+                val.UnitPrice * val.Quantity
+            ) + '</td>';
+            // text += '<td>' + (val.TaxCode) * (val.UnitPrice * val.Quantity) + '</td>';
+            // text += '<td>' + (((val.TaxCode) * (val.UnitPrice * val.Quantity)) + (val.UnitPrice * val.Quantity)) + '</td>';
+            text += '</tr>';
+            i++;
+            tot_gst = tot_gst + ((val.TaxCode) * (val.UnitPrice * val.Quantity));
+            tot_amt = tot_amt + (val.UnitPrice * val.Quantity);
+            discount_price = (((tot_amt) * dis_percent) / 100).toFixed(2);
+            amount_discount = (tot_amt - discount_price);
+        })
+        if ((response.data[0].TaxShow == "1") || (response.data[0].TotalShow == "1")) {
+            if (img_res != 'no') {
+                if (dis_percent > 0) {
+                    text += '<tr>';
+                    text += '<th colspan="8">' + "Discount(&#8377;)" + '</th>';
+                    text += '<th>' + discount_price + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                text += '<tr>';
+                text += '<th colspan="8" style="">' + "Total(&#8377;)" + '</th>';
+                text += '<th>' + amount_discount + "/-" + '</th>';
+                text += '</tr>';
+                if (response.data[0].Installation != "" && response.data[0].Installation != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="8" style="">' + 'Installation(&#8377;)' + '</th>';
+                    text += '<th>' + installation + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].Insurance != "" && response.data[0].Insurance != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="8" style="">' + 'Insurance(&#8377;)' + '</th>';
+                    text += '<th>' + insurance + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].Packing != "" && response.data[0].Packing != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="8" style="">' + 'Packing(&#8377;)' + '</th>';
+                    text += '<th>' + packing + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if ((response.data[0].ShippingAndHandling != "") && (response.data[0].ShippingAndHandling != NaN) && (response.data[0].ShippingAndHandling > 0)) {
+                    text += '<tr>';
+                    text += '<th colspan="8">' + 'Shipping And Handling(&#8377;)' + '</th>';
+                    text += '<th>' + shipping + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].TaxShow == "1") {
+                    text += '<tr>';
+                    text += '<th colspan="8" style="">' + "Tax(&#8377;)" + '</th>';
+                    text += '<th>' + tot_gst + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].TotalShow == "1") {
+                    text += '<tr>';
+                    text += '<th colspan="8">' + "Grand Total(&#8377;)" + '</th>';
+                    /*text += '<th>' + (
+                        (tot_amt + tot_gst + installation + insurance + packing) - (((tot_amt + tot_gst + installation + insurance + packing) * dis_percent) / 100)
+                    ).toFixed(2) + "/-" + '</th>'; */
+                    text += '<th>' + (amount_discount + tot_gst + installation + insurance + packing + shipping) + "/-" + '</th>';
+                    text += '</tr>';
+                }
+            } else {
+                if (dis_percent > 0) {
+                    text += '<tr>';
+                    text += '<th colspan="7">' + "Discount(&#8377;)" + '</th>';
+                    text += '<th>' + discount_price + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                text += '<tr>';
+                text += '<th colspan="7" style="">' + "Total(&#8377;)" + '</th>';
+                text += '<th>' + amount_discount + "/-" + '</th>';
+                text += '</tr>';
+                if (response.data[0].Installation != "" && response.data[0].Installation != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="7" style="">' + 'Installation(&#8377;)' + '</th>';
+                    text += '<th>' + installation + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].Insurance != "" && response.data[0].Insurance != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="7" style="">' + 'Insurance(&#8377;)' + '</th>';
+                    text += '<th>' + insurance + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].Packing != "" && response.data[0].Packing != NaN) {
+                    text += '<tr>';
+                    text += '<th colspan="7" style="">' + 'Packing(&#8377;)' + '</th>';
+                    text += '<th>' + packing + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if ((response.data[0].ShippingAndHandling != "") && (response.data[0].ShippingAndHandling != NaN) && (response.data[0].ShippingAndHandling > 0)) {
+                    text += '<tr>';
+                    text += '<th colspan="7">' + 'Shipping And Handling(&#8377;)' + '</th>';
+                    text += '<th>' + shipping + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].TaxShow == "1") {
+                    text += '<tr>';
+                    text += '<th colspan="7" style="">' + "Tax(&#8377;)" + '</th>';
+                    text += '<th>' + tot_gst + "/-" + '</th>';
+                    text += '</tr>';
+                }
+                if (response.data[0].TotalShow == "1") {
+                    text += '<tr>';
+                    text += '<th colspan="7" style="">' + "Grand Total(&#8377;)" + '</th>';
+                    /*text += '<th>' + (
+                        (tot_amt + tot_gst + installation + insurance + packing) - (((tot_amt + tot_gst + installation + insurance + packing) * dis_percent) / 100)
+                    ).toFixed(2) + "/-" + '</th>'; */
+                    text += '<th>' + (amount_discount + tot_gst + installation + insurance + packing + shipping) + "/-" + '</th>';
+                    text += '</tr>';
+                }
+            }
+        }
+        document.getElementById("api1").innerHTML += text;
+        document.getElementById("kind_atn").innerHTML = response.data[0].U_QUOTNM;
+        document.getElementById("addre").innerHTML = response.data[0].AddressExtension.BillToStreet + " " + response.data[0].AddressExtension.U_BSTATE + " " + response.data[0].AddressExtension.BillToZipCode + " " + response.data[0].AddressExtension.U_BCOUNTRY;
+    });
+
+    function myFunction() {
+        try {
+            document.execCommand('print', true, null)
+        } catch {
+            window.print()
+        }
+    }
+
+    function generatePDF() {
+        const element = document.getElementById('invoice');
+        html2pdf().from(element).save();
+    }
+
+    function Export2Doc(element, filename = '') {
+        var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+        var postHtml = "</body></html>";
+        var html = preHtml + document.getElementById(element).innerHTML + postHtml;
+        var blob = new Blob(['\ufeff', html], {
+            type: 'application/msword'
+        });
+        var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
+        filename = filename ? filename + '.doc' : 'document.doc';
+        var downloadLink = document.createElement("a");
+        document.body.appendChild(downloadLink);
+        if (navigator.msSaveOrOpenBlob) {
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            downloadLink.href = url;
+            downloadLink.download = filename;
+            downloadLink.click();
+        }
+        document.body.removeChild(downloadLink);
+    }
+</script>
+</div>
+</div>
+</body>
+
+</html>
