@@ -574,7 +574,6 @@ def showBPReport(objs):
         allbp.append(finalBpData)
     return allbp
 
-
 # to get object of business_partner salesPersonCode, PaymentTerms and Business Type
 def showBP(objs):
     allbp = [];
@@ -662,7 +661,9 @@ def showBP(objs):
         
         allbp.append(finalBpData)
     return allbp
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #added by millan on 08-September-2022
 #bp selected fields api
 @api_view(["GET"])
@@ -674,7 +675,9 @@ def get_bp(request):
         return Response({"message": "Success","status": 200,"data":finalBP})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-    
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #added by millan on 03-October-2022 for adding attachment and description
 @api_view(["POST"])
 def bp_attachment_create(request):
@@ -703,7 +706,9 @@ def bp_attachment_create(request):
         return Response({"message": "success","status": 200,"data":[]})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #for updating attachment
 @api_view(['POST'])
 def bp_attachment_update(request):
@@ -740,7 +745,9 @@ def bp_attachment_update(request):
         return Response({"message": "success","status": 200,"data":[]})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #for deleting an attachment
 @api_view(['POST'])
 def bp_attachment_delete(request):
@@ -759,7 +766,9 @@ def bp_attachment_delete(request):
         
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #get all attachment based on customer_id
 @api_view(["POST"])
 def bp_attachments(request):
@@ -775,7 +784,9 @@ def bp_attachments(request):
             return Response({"message": "Customer ID Not Found","status": 201,"data":[]})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #added by millan on 06-10-2022 to get sales of each particular month based on card code
 @api_view(["POST"])
 def monthlySales(request):
@@ -794,7 +805,9 @@ def monthlySales(request):
             return Response({"message": "Card Code Not Found","status": 201,"data":[]})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #added by millan on 14-10-2022 to get sales of each particular month based on card code
 @api_view(["POST"])
 def top5Activity(request):
@@ -824,7 +837,9 @@ def top5Activity(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # update BP Credit Limit
 @api_view(['GET'])
 def updatebpcreditlimit(request):
@@ -874,8 +889,9 @@ def updatebpcreditlimit(request):
         return Response({"message":"Successful","status":200, "data":[]})
     except Exception as e:
         return Response({"message":str(e),"status":201,"Model": "BP" ,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # update BP Credit Limit by BP
 @api_view(['POST'])
 def updatebpcreditlimitbybp(request):
@@ -917,7 +933,9 @@ def updatebpcreditlimitbybp(request):
     except Exception as e:
         return Response({"message":str(e),"status":201,"Model": "BP" ,"data":[]})
     
-    
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #BusinessPartner All API
 @api_view(["POST"])
 def all_filter(request):
@@ -948,7 +966,9 @@ def all_filter(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #BusinessPartner All API
 @api_view(["POST"])
 def all_filter_pagination(request):
@@ -994,52 +1014,9 @@ def all_filter_pagination(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-# #BusinessPartner All API
-# @api_view(["POST"])
-# def all_filter_pagination(request):
-#     try:
-#         SalesPersonCode = request.data['SalesPersonCode']
-#         PageNo = request.data['PageNo']
-#         MaxSize = request.data['MaxSize']
-#         SearchText = request.data['SearchText']
-#         if Employee.objects.filter(SalesEmployeeCode = SalesPersonCode).exists():
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-#             allEmp = getAllReportingToIds(SalesPersonCode)
-#             #print("getAllReportingToIds: ", allEmp)
-#             TotalBP = 0 
-#             if str(SearchText).strip() != "":
-#                 #print("in if search")
-#                 TotalBP = BusinessPartner.objects.filter( Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp), Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) | Q(EmailAddress__icontains = SearchText) | Q(CustomerType__icontains = SearchText) | Q(Phone1__icontains = SearchText) ) ).exclude(Link = 'Commission Agent').count()
-#             else:
-#                 #print("in else search")
-#                 TotalBP = BusinessPartner.objects.filter(Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp)).exclude(Link = 'Commission Agent').count()
-
-#             businesspartners_obj = []
-#             if MaxSize != "All":
-#                 page_obj = Pagination.objects.filter(MaxSize=MaxSize).first()
-#                 size = int(page_obj.MaxSize)
-#                 endWith = (PageNo * size)
-#                 startWith = (endWith - size)
-
-#                 if str(SearchText).strip() != "":
-#                     businesspartners_obj = BusinessPartner.objects.filter( Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp) , Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) | Q(EmailAddress__icontains = SearchText) | Q(CustomerType__icontains = SearchText) | Q(Phone1__icontains = SearchText) ) ).exclude(Link = 'Commission Agent').order_by("-id")[startWith:endWith]
-#                 else:
-#                     businesspartners_obj = BusinessPartner.objects.filter(Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp)).exclude(Link = 'Commission Agent').order_by("-id")[startWith:endWith]
-
-#             else:
-#                 if str(SearchText).strip() != "":
-#                     businesspartners_obj = BusinessPartner.objects.filter( Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp) , Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) | Q(EmailAddress__icontains = SearchText) | Q(CustomerType__icontains = SearchText) | Q(Phone1__icontains = SearchText) ) ).exclude(Link = 'Commission Agent').order_by("-id")
-#                 else:
-#                     businesspartners_obj = BusinessPartner.objects.filter(Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp)).exclude(Link = 'Commission Agent').order_by("-id")
-
-#             result = showBP(businesspartners_obj)
-#             return Response({"message": "Success","status": 200, "TotalBP": TotalBP, "data":result})
-#         else:
-#             return Response({"message": "Invalid SalesPersonCode?","status": 201,"data":[]})
-#     except Exception as e:
-#         return Response({"message": str(e),"status": 201,"data":[]})
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # Groups
 @api_view(["GET"])
 def all_bp_groupcode(request):
@@ -1060,10 +1037,9 @@ def all_bp_zones(request):
         return Response({"message": "Success","status": 200, "data":zoneJson.data})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-    
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bp list with total purchase
 @api_view(['POST'])
 def filter_ledger_dashboard(request):
@@ -1279,122 +1255,6 @@ def filter_ledger_dashboard(request):
     # except Exception as e:
     #     return Response({"message": str(e),"status": 201,"data":[]})
     
-# old filter dashboard
-def filter_ledger_dashboard_old(request):
-    try:
-        Filter = request.data['Filter']
-        SalesType = request.data['Type']
-        FromDate = request.data['FromDate']
-        ToDate = request.data['ToDate']
-
-        SalesPersonCode = -1
-        if 'SalesPersonCode' in request.data:
-            SalesPersonCode = request.data['SalesPersonCode']
-        zones = getZoneByEmployee(SalesPersonCode)
-
-        # print("EmpZones", zones)
-        SearchText = ""
-        if 'SearchText' in request.data:
-            SearchText = request.data['SearchText']
-
-        cardCodeList = list(Invoice.objects.filter(CancelStatus="csNo").values_list('CardCode', flat=True).distinct())
-        filterObjs = []
-        if str(Filter).lower() == 'group':
-            GroupCodeArr = list(BusinessPartner.objects.filter(CardCode__in = cardCodeList).values_list("GroupCode", flat=True).distinct())
-            filterObjs = BusinessPartnerGroups.objects.filter(Name__icontains = SearchText, Code__in  = GroupCodeArr).order_by('Name')
-        else:
-            zoneList = list(BusinessPartner.objects.filter(CardCode__in = cardCodeList, U_U_UTL_Zone__in = zones).values_list("U_U_UTL_Zone", flat=True).distinct())
-            filterObjs = BusinessPartnerZone.objects.filter(Name__icontains = SearchText, Name__in = zoneList).order_by('Name')
-
-        print("Code list count", len(filterObjs))
-        if 'PageNo' in request.data:
-            PageNo = int(request.data['PageNo'])
-            MaxSize = request.data['MaxSize']
-            if MaxSize != "All":
-                size = int(MaxSize)
-                endWith = (PageNo * size)
-                startWith = (endWith - size)
-                filterObjs = filterObjs[startWith:endWith]
-
-        totalSales = 0
-        dataContext = []
-        docEntrys = []
-        countLoop = 0
-        for groupObj in filterObjs:
-            countLoop = countLoop+1
-            print("countLoop", countLoop)
-            # bpObjs = BusinessPartner.objects.filter(CardCode__in = cardCodeList).values("id", "CardCode", "CardName")
-            if str(Filter).lower() == 'group':
-                bpObjs = BusinessPartner.objects.filter(GroupCode = groupObj.Code, CardCode__in = cardCodeList).values("id", "CardCode", "CardName")
-            else:
-                bpObjs = BusinessPartner.objects.filter(U_U_UTL_Zone = groupObj.Code, CardCode__in = cardCodeList).values("id", "CardCode", "CardName")
-            
-            print("Code wiase bp list", len(bpObjs))
-            totalSalesByGroup = 0 
-            for bpobj in bpObjs:
-                #print(bpobj['CardCode'])
-                if Invoice.objects.filter(CardCode = bpobj['CardCode']).exists():
-                    orderList = []
-                    if str(FromDate) != "":
-                        orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = bpobj['CardCode'], DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry","DiscountPercent").exclude(DocumentStatus = 'bost_Cancel').order_by('-id')
-                    else:
-                        orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = bpobj['CardCode']).exclude(DocumentStatus = 'bost_Cancel').values("id","DocTotal", "CreateDate", "VatSum", "DocEntry","DiscountPercent").order_by('-id')
-                    
-                    if len(orderList) != 0:
-                        
-                        for order in orderList:
-                            #print("in invoice list")
-                            docEntrys.append(order['DocEntry'])
-                            DocTotal = order['DocTotal']
-                            VatSum = order['VatSum']
-
-                            InvId = order['id']
-                            DiscountPercent = float(order['DiscountPercent'])
-                            if str(SalesType).lower() == "net":
-                                BaseTotal = 0
-                                itemObjs = DocumentLines.objects.filter(InvoiceID = InvId).values("id","LineTotal")
-                                for itObjs in itemObjs:
-                                    LineTotal = float(itObjs['LineTotal'])
-                                    BaseTotal = BaseTotal + LineTotal
-                                disAmt = 0
-                                if BaseTotal != 0:
-                                    if float(DiscountPercent) != 0.0:
-                                        disAmt = (BaseTotal * DiscountPercent) / 100
-                                DocTotal = round(float(BaseTotal - disAmt), 2)
-                            # end if
-                            totalSalesByGroup = totalSalesByGroup + float(DocTotal)
-                    # endif
-                # endif
-            # endfor
-            # if totalSalesByGroup > 0:
-            bpData = {
-                "GroupName": groupObj.Name,
-                "GroupCode": groupObj.Code,
-                "TotalSales": round(totalSalesByGroup, 2)
-            }
-            dataContext.append(bpData)
-            totalSales = float(totalSales) + float(totalSalesByGroup)
-
-        # endfor
-        allPaymentsList = []
-        if str(FromDate) != "":
-            allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys, DocDate__gte = FromDate, DocDate__lte = ToDate).values_list('SumApplied', flat=True)
-        else:
-            allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys).values_list('SumApplied', flat=True)
-
-        allPayment = 0
-        for item in allPaymentsList:
-            allPayment += float(item)
-
-        TotalSales = totalSales
-        TotalReceivePayment = round(allPayment, 2)
-        DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
-
-        return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount})
-    except Exception as e:
-        return Response({"message": str(e),"status": 201,"data":[]})
-
-
 # bp list with total purchase
 @api_view(['POST'])
 def ledger_dashboard_count(request):
@@ -1592,144 +1452,6 @@ def ledger_dashboard_count(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
     
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-@api_view(['POST'])
-def ledger_dashboard_count_old(request):
-    try:
-        Filter = request.data['Filter']
-        Code = request.data['Code']
-        SalesType = request.data['Type']
-        FromDate = request.data['FromDate']
-        ToDate = request.data['ToDate']
-
-        SalesPersonCode = -1
-        if 'SalesPersonCode' in request.data:
-            SalesPersonCode = request.data['SalesPersonCode']
-        zones = getZoneByEmployee(SalesPersonCode)
-        # print("zones >>>>>>>>>>>>>>>>>>",zones)
-
-        CardCodeArr = []
-        if str(Filter).lower() == 'group':
-            CardCodeArr = list(BusinessPartner.objects.filter(GroupCode = Code, U_U_UTL_Zone__in = zones).values_list("CardCode", flat=True))
-        elif str(Filter).lower() == 'zone':
-            CardCodeArr = list(BusinessPartner.objects.filter( U_U_UTL_Zone = Code).values_list("CardCode", flat=True))
-        else:
-            CardCodeArr = list(BusinessPartner.objects.filter(U_U_UTL_Zone__in = zones).values_list("CardCode", flat=True))
-
-        dataContext = []
-        docEntrys = []
-        totalSales = 0
-
-        # print(CardCodeArr)
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if True:
-            if str(FromDate) != "":
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode__in = CardCodeArr, DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DiscountPercent").order_by('-id')
-            else:
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode__in = CardCodeArr).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DiscountPercent").order_by('-id')
-            
-            # print("Length of objects orderList: ", len(orderList))
-            if len(orderList) != 0:
-                totalSalesByBp = 0 
-                #print("Query", orderList.query)
-                for order in orderList:
-                    #print("in invoice list")
-                    docEntrys.append(order['DocEntry'])
-                    DocTotal = order['DocTotal']
-                    VatSum = order['VatSum']
-
-                    InvId = order['id']
-                    # print("InvId", InvId)
-                    DiscountPercent = float(order['DiscountPercent'])
-                    if str(SalesType).lower() == "net":
-                        BaseTotal = 0
-                        itemObjs = DocumentLines.objects.filter(InvoiceID = InvId).values("id","LineTotal")
-                        for itObjs in itemObjs:
-                            LineTotal = float(itObjs['LineTotal'])
-                            BaseTotal = BaseTotal + LineTotal
-                        disAmt = 0
-                        if BaseTotal != 0:
-                            if float(DiscountPercent) != 0.0:
-                                disAmt = (BaseTotal * DiscountPercent) / 100
-                        DocTotal = round(float(BaseTotal - disAmt), 2)
-                    # end if
-                    totalSalesByBp = totalSalesByBp + float(DocTotal)
-                totalSales = float(totalSales) + float(totalSalesByBp)
-
-        # ##########################
-        
-        # ##########################
-        allPaymentsList = []
-        if str(FromDate) != "":
-            allPaymentsList = IncomingPayments.objects.filter(CardCode__in = CardCodeArr, DocDate__gte = FromDate, DocDate__lte = ToDate).exclude(JournalRemarks = 'Canceled').values_list('TransferSum', flat=True)
-        else:
-            allPaymentsList = IncomingPayments.objects.filter(CardCode__in = CardCodeArr).exclude(JournalRemarks = 'Canceled').values_list('TransferSum', flat=True)
-        allPayment = 0
-        for item in allPaymentsList:
-            allPayment += float(item)
-        # ##########################
-
-        # ##########################
-        allCreditNoteList = []
-        if str(FromDate) != "":
-            allCreditNoteList = CreditNotes.objects.filter(CancelStatus="csNo", CardCode__in = CardCodeArr, DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocDate", "DiscountPercent").order_by('-DocDate')
-        else:
-            allCreditNoteList = CreditNotes.objects.filter(CancelStatus="csNo", CardCode__in = CardCodeArr).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocDate", "DiscountPercent").order_by('-DocDate')
-        
-        TotalCreditNote = 0
-        for creditNotes in allCreditNoteList:
-            creditNoteId = creditNotes['id']
-            DocTotal = creditNotes['DocTotal']
-            DiscountPercent = creditNotes['DiscountPercent']
-            if str(SalesType).lower() == "net":
-                BaseTotal = 0
-                itemObjs = CreditNotesDocumentLines.objects.filter(CreditNotesId = creditNoteId).values("id","LineTotal")
-                for itObjs in itemObjs:
-                    LineTotal = float(itObjs['LineTotal'])
-                    BaseTotal = BaseTotal + LineTotal
-                disAmt = 0
-                if BaseTotal != 0:
-                    if float(DiscountPercent) != 0.0:
-                        disAmt = (BaseTotal * DiscountPercent) / 100
-                DocTotal = round(float(BaseTotal - disAmt), 2)
-            TotalCreditNote = TotalCreditNote + float(DocTotal)
-        # ##########################
-        # ##########################
-
-        TotalSales = round(totalSales, 2)
-        TotalReceivePayment = round(allPayment, 2)
-        DifferenceAmount = 0
-        if int(TotalSales) > 0:
-            DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
-        # TotalCreditNote = round(allCreditNote, 2)
-        # ##########################
-        # ##########################
-        # Ods = Order.objects.filter(CardCode__in = CardCodeArr, DocumentStatus="bost_Open", CancelStatus="csNo")
-        # allord = pending_order(Ods)        
-        # pd_ods = pd.DataFrame(allord, columns=['OrderID', 'OrderDocEntry', 'CardCode', 'CardName', 'PendingAmount', 'PendingQty'])
-        # # df = pd_ods.groupby(['CardCode', 'CardName'], as_index=False)['PendingAmount'].sum()
-        # TotalPendingSales = pd_ods['PendingAmount'].sum()
-
-        TotalPendingSales = 0
-
-        # ##########################
-        contaxt = {
-            "TotalSales": TotalSales, 
-            "TotalReceivePayment": TotalReceivePayment, 
-            "DifferenceAmount": DifferenceAmount,
-            "TotalCreditNote": round(TotalCreditNote, 2),
-            "TotalPendingSales": round(TotalPendingSales, 2)
-        }
-
-        return Response({"message": "Success","status": 200, "data":[contaxt]})
-    except Exception as e:
-        return Response({"message": str(e),"status": 201,"data":[]})
-
-
 # bp list with total purchase
 @api_view(['POST'])
 def ledger_dashboard(request):
@@ -1902,130 +1624,6 @@ def ledger_dashboard(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-# # bp list with total purchase
-# @api_view(['POST'])
-# def ledger_dashboard_old(request):
-#     try:
-#         Filter = request.data['Filter']
-#         Code = request.data['Code']
-#         SalesType = request.data['Type']
-#         FromDate = request.data['FromDate']
-#         ToDate = request.data['ToDate']
-
-#         SalesPersonCode = -1
-#         if 'SalesPersonCode' in request.data:
-#             SalesPersonCode = request.data['SalesPersonCode']
-#         zones = getZoneByEmployee(SalesPersonCode)
-
-#         # print("zones>>> ", zones)
-#         SearchText = ""
-#         if 'SearchText' in request.data:
-#             SearchText = request.data['SearchText']
-
-#         OrderByName = "a-z" #a-z/z-a
-#         OrderByAmt = "asc" #desc
-#         if 'OrderByName' in request.data:
-#             OrderByName = str(request.data['OrderByName']).strip()
-#         if 'OrderByAmt' in request.data:
-#             OrderByAmt = str(request.data['OrderByAmt']).strip()
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         orderby = "CardName"
-#         if str(OrderByName) == 'z-a':
-#             orderby = "-CardName"
-
-#         cardCodeList = []
-#         if str(FromDate) != "":
-#             cardCodeList = list(Invoice.objects.filter(CancelStatus="csNo", DocDate__gte = FromDate, DocDate__lte = ToDate).values_list('CardCode', flat=True).distinct())
-#         else:
-#             cardCodeList = list(Invoice.objects.filter(CancelStatus="csNo").values_list('CardCode', flat=True).distinct())
-        
-#         # print("cardCodeList >>>", cardCodeList)
-#         bpObjs = []
-        
-#         if str(Filter).lower() == 'group':
-#             bpObjs = BusinessPartner.objects.filter( Q( Q(CardCode__in = cardCodeList) & Q(GroupCode = Code) & Q(U_U_UTL_Zone__in = zones) ) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) ) ).values("id", "CardCode", "CardName").order_by(orderby)
-#         elif str(Filter).lower() == 'zone':
-#             bpObjs = BusinessPartner.objects.filter( Q( Q(CardCode__in = cardCodeList) & Q(U_U_UTL_Zone = Code) ) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) ) ).values("id", "CardCode", "CardName").order_by(orderby)
-#         else:
-#             bpObjs = BusinessPartner.objects.filter( Q( Q(CardCode__in = cardCodeList) & Q(U_U_UTL_Zone__in = zones) ) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) ) ).values("id", "CardCode", "CardName").order_by(orderby)
-        
-#         # print("bpObjs", bpObjs.query)
-
-#         if 'PageNo' in request.data:
-#             PageNo = int(request.data['PageNo'])
-#             MaxSize = request.data['MaxSize']
-#             if MaxSize != "All":
-#                 size = int(MaxSize)
-#                 endWith = (PageNo * size)
-#                 startWith = (endWith - size)
-#                 bpObjs = bpObjs[startWith:endWith]
-
-#         dataContext = []
-#         docEntrys = []
-#         totalSales = 0
-#         for bpobj in bpObjs:
-#             orderList = []
-#             if str(FromDate) != "":
-#                 orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = bpobj['CardCode'], DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DiscountPercent").order_by('-id')
-#             else:
-#                 orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = bpobj['CardCode']).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DiscountPercent").order_by('-id')
-            
-#             if len(orderList) != 0:
-#                 totalSalesByBp = 0 
-#                 #print("Query", orderList.query)
-#                 for order in orderList:
-#                     #print("in invoice list")
-#                     docEntrys.append(order['DocEntry'])
-#                     DocTotal = order['DocTotal']
-#                     VatSum = order['VatSum']
-
-#                     InvId = order['id']
-#                     DiscountPercent = float(order['DiscountPercent'])
-#                     if str(SalesType).lower() == "net":
-#                         BaseTotal = 0
-#                         itemObjs = DocumentLines.objects.filter(InvoiceID = InvId).values("id","LineTotal")
-#                         for itObjs in itemObjs:
-#                             LineTotal = float(itObjs['LineTotal'])
-#                             BaseTotal = BaseTotal + LineTotal
-#                         disAmt = 0
-#                         if BaseTotal != 0:
-#                             if float(DiscountPercent) != 0.0:
-#                                 disAmt = (BaseTotal * DiscountPercent) / 100
-#                         DocTotal = round(float(BaseTotal - disAmt), 2)
-                        
-#                     # end if
-#                     totalSalesByBp = totalSalesByBp + float(DocTotal)
-
-#                 bpData = {
-#                     "CardName": bpobj['CardName'],
-#                     "CardCode": bpobj['CardCode'],
-#                     "TotalSales": round(totalSalesByBp, 2)
-#                 }
-#                 dataContext.append(bpData)
-
-#                 totalSales = float(totalSales) + float(totalSalesByBp)
-#             else:
-#                 pass
-#                 #print('no invoices')
-
-#         allPaymentsList = []
-#         if str(FromDate) != "":
-#             allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys, DocDate__gte = FromDate, DocDate__lte = ToDate).values_list('SumApplied', flat=True)
-#         else:
-#             allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys).values_list('SumApplied', flat=True)
-
-#         allPayment = 0
-#         for item in allPaymentsList:
-#             allPayment += float(item)
-
-#         TotalSales = round(totalSales, 2)
-#         TotalReceivePayment = round(allPayment, 2)
-#         DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
-
-#         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount})
-#     except Exception as e:
-#         return Response({"message": str(e),"status": 201,"data":[]})
-
 # bp list with total purchase
 # from django.db import connection as db_connection
 @api_view(['POST'])
@@ -2098,7 +1696,6 @@ def receivable_dashboard(request):
         else:
             cardCodesList = list(BusinessPartner.objects.filter(Q(U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText))).values_list("CardCode", flat=True))
 
-        # print("cardCodesList", cardCodesList)
         cardCodeStr = "','".join(cardCodesList)
         # print("cardCodeStr", cardCodeStr)
 
@@ -2171,211 +1768,167 @@ def receivable_dashboard(request):
     
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-
-# bp list with total purchase
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @api_view(['POST'])
-def receivable_dashboard_old(request):
-    # try:
-        Filter = request.data['Filter']
-        Code = request.data['Code']
-        SalesType = request.data['Type']
-        FromDate = str(request.data['FromDate'])
-        ToDate = str(request.data['ToDate'])
-        
-        print(FromDate, ToDate)
-        
-        SalesPersonCode = -1
-        if 'SalesPersonCode' in request.data:
-            SalesPersonCode = request.data['SalesPersonCode']
+def due_payment_dashboard_count(request):
+    try:
+        SalesPersonCode = request.data['SalesPersonCode']
+        DueDaysGroup = request.data['DueDaysGroup']
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        dueDaysGroupQuery = "AND `DueDate` >= CURDATE()"
+        if str(DueDaysGroup) == '-1': # overdue invoices
+            dueDaysGroupQuery = "AND `DueDate` < CURDATE()"
+
+        elif DueDaysGroup != "": # due date in next DueDaysGroup
+            dueDaysGroupQuery = f"AND `DueDate` >= CURDATE() AND `DueDate` <= DATE_ADD(CURDATE(), INTERVAL {DueDaysGroup} DAY)"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         zones = getZoneByEmployee(SalesPersonCode)
-
-        SearchText = ""
-        if 'SearchText' in request.data:
-            SearchText = request.data['SearchText']
-        
-        bpObjs = []
-        if str(Filter).lower() == 'group':
-            bpObjs = BusinessPartner.objects.filter(Q(GroupCode = Code, U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText)) ).values("id", "CardCode", "CardName", "PayTermsGrpCode","CreditLimit","CreditLimitLeft").order_by('CardCode')
-        elif str(Filter).lower() == 'zone':
-            bpObjs = BusinessPartner.objects.filter(Q(U_U_UTL_Zone = Code) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText))).values("id", "CardCode", "CardName", "PayTermsGrpCode","CreditLimit","CreditLimitLeft").order_by('CardCode')
-        else:
-            bpObjs = BusinessPartner.objects.filter(Q(U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText))).values("id", "CardCode", "CardName", "PayTermsGrpCode","CreditLimit","CreditLimitLeft").order_by('CardCode')
-        
-        # print(bpObjs)
-        if 'PageNo' in request.data:
-            PageNo = int(request.data['PageNo'])
-            MaxSize = request.data['MaxSize']
-            if MaxSize != "All":
-                size = int(MaxSize)
-                endWith = (PageNo * size)
-                startWith = (endWith - size)
-                bpObjs = bpObjs[startWith:endWith]
-
+        zonesStr = "','".join(zones)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
+        mycursor = mydb.cursor(dictionary=True, buffered=True)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        sqlQuery = f"""
+            SELECT 
+                *, SUM(`TotalDue`) as TotalPending 
+            FROM `BusinessPartner_receivable`
+            WHERE
+                U_U_UTL_Zone IN('{zonesStr}') AND
+                `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1 
+                {dueDaysGroupQuery}
+        """
+        # `DueDate` >= CURDATE() AND DueDate` <= DATE_ADD(CURDATE(), INTERVAL {DueDaysGroup} DAY)
+        print(sqlQuery)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mycursor.execute(sqlQuery)
+        duePaymentData = mycursor.fetchall()
         dataContext = []
-        totalSales = 0
-        # for one bp Receipt and Pending
-        allPayment = 0
-        allbpJELine = 0
-        allCreditNote = 0
-        print(">>>>>> No of Objs", len(bpObjs))
-        for obj in bpObjs:
-            # print(obj)
-            CardCode = obj['CardCode']
-            allPaymentsListBP = []
-            orderList = []
-            # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            bpobj = BusinessPartner.objects.filter(CardCode = CardCode).first()
-            PayTermsGrpCode = bpobj.PayTermsGrpCode
-            CreditLimit = bpobj.CreditLimit
-            ptgcObj = PaymentTermsTypes.objects.filter(GroupNumber = PayTermsGrpCode).first()
-            creditLimitDayes = ptgcObj.PaymentTermsGroupName
+        totalPaybal = 0
+        for obj in duePaymentData:
+            print("CardCode", obj['CardCode'])
+            totalPaybal    = round(float(obj['TotalPending']), 2)
+        # endFor
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        TotalPaybal = (round(float(totalPaybal)))
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        return Response({"message": "Success","status": 200, "data":dataContext, "TotalPaybal": TotalPaybal})
+    except Exception as e:
+        return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# 
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@api_view(['POST'])
+def due_payment_dashboard(request):
+    try:
+        SalesPersonCode = request.data['SalesPersonCode']
+        SearchText   = request.data['SearchText']
+        OrderByName  = str(request.data['OrderByName']).strip()
+        OrderByAmt   = str(request.data['OrderByAmt']).strip()
+        DueDaysGroup = request.data['DueDaysGroup']
+        PageNo       = int(request.data['PageNo'])
+        MaxSize      = request.data['MaxSize']
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        zones    = getZoneByEmployee(SalesPersonCode)
+        zonesStr = "','".join(zones)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        orderby = ""
+        if str(OrderByName).lower() == 'a-z':
+            orderby = "Order By CardName asc"
+        elif str(OrderByName).lower() == 'z-a':
+            orderby = "Order By CardName desc"
+        elif str(OrderByAmt).lower() == 'asc':
+            orderby = "Order By TotalPending asc"
+        elif str(OrderByAmt).lower() == 'desc':
+            orderby = "Order By TotalPending desc"
+        else:
+            orderby = "Order By DocDate asc"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        SearchQuery = ''
+        if str(SearchText) != '':
+            SearchQuery = f"AND (CardCode like '%%{SearchText}%%' OR CardName like '%%{SearchText}%%')"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        limitQuery = ""
+        if str(MaxSize).lower() != "all":   
+            size = int(MaxSize)
+            endWith = (PageNo * size)
+            startWith = (endWith - size)
+            limitQuery = f"Limit {startWith}, {MaxSize}"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        dueDaysGroupQuery = "AND `DueDate` >= CURDATE()"
+        if str(DueDaysGroup) == '-1': # overdue invoices
+            dueDaysGroupQuery = "AND `DueDate` < CURDATE()"
+        elif DueDaysGroup != "": # due date in next DueDaysGroup
+            dueDaysGroupQuery = f"AND `DueDate` >= CURDATE() AND `DueDate` <= DATE_ADD(CURDATE(), INTERVAL {DueDaysGroup} DAY)"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
+        mycursor = mydb.cursor(dictionary=True, buffered=True)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        sqlQuery = f"""
+            SELECT 
+                *, SUM(`TotalDue`) as TotalPending 
+            FROM `BusinessPartner_receivable`
+            WHERE
+                U_U_UTL_Zone IN('{zonesStr}') AND
+                `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1 
+                {dueDaysGroupQuery}
+                {SearchQuery}
+            GROUP BY 
+                CardCode
+            {orderby}
+            {limitQuery};
+        """
+        print(sqlQuery)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mycursor.execute(sqlQuery)
+        duePaymentData = mycursor.fetchall()
+        dataContext = []
+        totalPaybal = 0
+        for obj in duePaymentData:
+            print("CardCode", obj['CardCode'])
+            CardCode        = obj['CardCode']
+            CardName        = obj['CardName']
+            PendingTotal    = round(float(obj['TotalPending']), 2)
+            # ContactPerson   = obj['ContactPerson']
+            EmailAddress    = obj['EmailAddress']
+            Phone1          = obj['MobileNo']
+            GSTIN           = obj['GSTIN']
+            BPAddress       = obj['BPAddresses']
+            CreditLimit     = obj['CreditLimit']
+            CreditLimitDayes = obj['CreditLimitDayes']
+            GroupName       = obj['GroupName']
 
-            GSTIN = ""
-            BPAddress = ""
-            if BPBranch.objects.filter(BPCode = CardCode).exists():
-                bpBranch = BPBranch.objects.filter(BPCode = CardCode).first()
-                GSTIN = str(bpBranch.GSTIN)
-                BPAddress = f"{bpBranch.Street} {bpBranch.City} {bpBranch.ZipCode}"
-            GroupName = ""
-            if BusinessPartnerGroups.objects.filter(Code = bpobj.GroupCode).exists():
-                bpGroup = BusinessPartnerGroups.objects.filter(Code = bpobj.GroupCode).first()
-                GroupName = bpGroup.Name
-                
+            totalPaybal = totalPaybal + PendingTotal
+
             # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            if str(FromDate) != "":
-                orderList = Invoice.objects.filter(CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate, DocumentStatus = 'bost_Open',CancelStatus="csNo" ).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocDate", "DiscountPercent", "PaidToDateSys").order_by('-DocDate')
-            else:
-                orderList = Invoice.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocDate", "DiscountPercent", "PaidToDateSys").order_by('-DocDate')
             
-            totalSalesByBp = 0 
-            totalPaymentsByBp = 0 
-            print("BPs No of Invoice", len(orderList))
-            docEntrys = []
-            noOfInv = 1
-            payDays = 1
-            if len(orderList) != 0:
-                for order in orderList:
-                    #print("in invoice list")
-                    docEntrys.append(order['DocEntry'])
-                    DocTotal = order['DocTotal']
-                    VatSum = order['VatSum']
-                    PaidToDateSys = order['PaidToDateSys']
-                    totalPaymentsByBp = totalPaymentsByBp + float(PaidToDateSys)
-
-                    InvId = order['id']
-                    DiscountPercent = float(order['DiscountPercent'])
-                    if str(SalesType).lower() == "net":
-                        BaseTotal = 0
-                        itemObjs = DocumentLines.objects.filter(InvoiceID = InvId).values("id","LineTotal")
-                        for itObjs in itemObjs:
-                            LineTotal = float(itObjs['LineTotal'])
-                            BaseTotal = BaseTotal + LineTotal
-                        disAmt = 0
-                        if BaseTotal != 0:
-                            if float(DiscountPercent) != 0.0:
-                                disAmt = (BaseTotal * DiscountPercent) / 100
-                        DocTotal = round(float(BaseTotal - disAmt), 2)
-                        
-                    # end if
-                    totalSalesByBp = totalSalesByBp + float(DocTotal)
-                    if IncomingPaymentInvoices.objects.filter(InvoiceDocEntry = order['DocEntry']).exists():
-                        invIncPay = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry = order['DocEntry']).values('id','DocDate').first()
-                        #print("invIncPay['DocDate']", invIncPay['DocDate'])
-                        # CreateDate = inv['CreateDate'] # DocDate = invIncPay['DocDate']
-                        CreateDate = datetime.strptime(order['DocDate'], '%Y-%m-%d')
-                        DocDate = datetime.strptime(invIncPay['DocDate'], '%Y-%m-%d')
-                        DocDate - CreateDate
-                        dayCount = DocDate - CreateDate
-
-                        #print("CreateDate", CreateDate, "DocDate", DocDate, "dayCount", dayCount.days)
-                        payDays = payDays + dayCount.days
-                        noOfInv = noOfInv+1
-                    # end if
-                # end for
-            # end if
-
-            # ##################
-            # CreditNote
-            # ##################
-            allCreditNoteList = []
-            if str(FromDate) != "":
-                allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values('id', 'DocNum', 'DocTotal', 'DocDate', 'PaidToDateSys')
-            else:
-                allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode).values('id', 'DocNum', 'DocTotal', 'DocDate', 'PaidToDateSys')
-            bpCreditNote = 0
-            for item2 in allCreditNoteList:
-                DocTotal = abs(float(item2['DocTotal']) - float(item2['PaidToDateSys']))
-                bpCreditNote += float(DocTotal)
-            allCreditNote += bpCreditNote
-
-            # ##################
-            # JournalEntry
-            # ##################
-            jeLineList = []
-            if str(FromDate) != "":
-                jeQuery = f"SELECT `JournalEntries_journalentries`.`id`, `JournalEntries_journalentries`.`JdtNum`, `JournalEntries_journalentries`.`ReferenceDate`, `JournalEntries_journalentrylines`.`Debit`, `JournalEntries_journalentrylines`.`Credit`, `JournalEntries_journalentrylines`.`Line_ID` FROM `JournalEntries_journalentrylines`, `JournalEntries_journalentries` WHERE `JournalEntries_journalentrylines`.`JournalEntriesId` = `JournalEntries_journalentries`.id AND `JournalEntries_journalentries`.`U_Cancel` = 'N' AND `ShortName`= '{CardCode}' AND `JournalEntries_journalentries`.`OriginalJournal` = 'ttJournalEntry' AND `JournalEntries_journalentries`.`ReferenceDate` => '{FromDate}' AND `JournalEntries_journalentries`.`ReferenceDate` <= '{ToDate}'"
-                print(jeQuery)
-                jeLineList = JournalEntryLines.objects.raw(jeQuery)
-            else:
-                jeLineList = JournalEntryLines.objects.raw(f"SELECT `JournalEntries_journalentries`.`id`, `JournalEntries_journalentries`.`JdtNum`, `JournalEntries_journalentries`.`ReferenceDate`, `JournalEntries_journalentrylines`.`Debit`, `JournalEntries_journalentrylines`.`Credit`, `JournalEntries_journalentrylines`.`Line_ID` FROM `JournalEntries_journalentrylines`, `JournalEntries_journalentries` WHERE `JournalEntries_journalentrylines`.`JournalEntriesId` = `JournalEntries_journalentries`.id AND `JournalEntries_journalentries`.`U_Cancel` = 'N' AND `ShortName`= '{CardCode}' AND `JournalEntries_journalentries`.`OriginalJournal` = 'ttJournalEntry'")
-
-            bpJELineTotal = 0
-            if len(jeLineList) > 0:
-                for line in jeLineList:
-                    
-                    DocTotal = float(line.Debit) - float(line.Credit)
-                    sacAPIRsponse = requests.get(f"http://65.2.148.88:8000/Ledure/General/Reconcilation.xsjs?DBName=LEDURE_LIVE_300323&TranId={line.JdtNum}&ShortName={CardCode}&LineId={line.Line_ID}", verify=False)
-                    rsponseJson = json.loads(sacAPIRsponse.text)
-                    # print(rsponseJson)
-                    rsponseData = rsponseJson['value']
-                    tempAmt  = DocTotal
-                    if len(rsponseData) > 0:
-                        # ReconSum = rsponseData[0]['ReconSum']
-                        # if float(rsponseData[0]['Debit']) != 0:
-                        ReconSum = 0
-                        for recoObj in rsponseData:
-                            ReconSum = ReconSum + float(recoObj['ReconSum'])
-                            
-                        if float(line.Debit) != 0:
-                            tempAmt = abs(DocTotal) - float(ReconSum)
-                            bpJELineTotal = bpJELineTotal + float(tempAmt)
-                        else:
-                            tempAmt = DocTotal + float(ReconSum)
-                            bpJELineTotal = bpJELineTotal + float(tempAmt)
-
-                    bpJELineTotal = bpJELineTotal + tempAmt
-                    
-            allbpJELine += bpJELineTotal
-            allPayment += totalPaymentsByBp
-            totalSales = float(totalSales) + float(totalSalesByBp)
-            AvgPayDays = (payDays/noOfInv)
+            AvgPayDays = 0
             bpData = {
-                "CardName": bpobj.CardName,
+                "CardName": CardName,
                 "CardCode": CardCode,
-                "EmailAddress": bpobj.EmailAddress,
-                "Phone1": bpobj.Phone1,
+                "EmailAddress": EmailAddress,
+                "Phone1": Phone1,
                 "GSTIN": GSTIN,
                 "BPAddress": BPAddress,
                 "GroupName": GroupName,
                 "CreditLimit": CreditLimit,
-                "CreditLimitDayes": creditLimitDayes,
-                "TotalSales": abs(round(totalSalesByBp, 2)),
-                "TotalReceivePayment":abs(round(totalPaymentsByBp, 2)),
-                # "DifferenceAmount":round(float(float(totalSalesByBp) - float(tempPayment) - float(tempCreditNote)), 2),
-                "DifferenceAmount":abs(round(float(float(totalSalesByBp) - float(totalPaymentsByBp) - float(bpCreditNote) + float(bpJELineTotal)), 2)),
-                # "DifferenceAmount":round(float(float(totalSalesByBp) - float(totalPaymentsByBp)), 2),
-                "AvgPayDays": AvgPayDays    
+                "CreditLimitDayes": CreditLimitDayes,
+                "TotalSales": (round(float(PendingTotal))),
+                "TotalReceivePayment": 0,
+                "DifferenceAmount":(round(float(PendingTotal))),
+                "AvgPayDays": round(AvgPayDays, 2)
             }
             dataContext.append(bpData)
 
-        TotalSales = totalSales
-        TotalReceivePayment = abs(round(allPayment, 2))
-        DifferenceAmount = abs(round(float(float(TotalSales) - float(allPayment) + float(allCreditNote) + float(allbpJELine)), 2))
-        # DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
+        TotalSales = 0
+        TotalReceivePayment = 0
+        DifferenceAmount = (round(float(totalPaybal)))
 
         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount})
-    # except Exception as e:
-    #     return Response({"message": str(e),"status": 201,"data":[]})
+    
+    except Exception as e:
+        return Response({"message": str(e),"status": 201,"data":[]})
 
 # bp list with total purchase
 @api_view(['POST'])
@@ -2716,8 +2269,6 @@ def bp_purchase_invoices(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-    
-    
 # bp list with total purchase
 @api_view(['POST'])
 def bp_receivable(request):
@@ -2728,9 +2279,6 @@ def bp_receivable(request):
         ToDate = request.data['ToDate']
         
         dataContext = []
-        # docEntrys = []
-        # totalSalesByBp = 0
-        # totalPaymentsByBp = 0
         totalPendingsByBp = 0
         allCreditNote = 0
         allbpJELine = 0
@@ -2923,538 +2471,195 @@ def bp_receivable(request):
     # except Exception as e:
     #     return Response({"message": str(e),"status": 201,"data":[]})
 
-    
-    
 # bp list with total purchase
-# @api_view(['POST'])
-# def bp_receivable___(request):
-#     # try:
-#         CardCode = request.data['CardCode']
-#         SalesType = request.data['Type'] # Gross/Net
-#         FromDate = request.data['FromDate']
-#         ToDate = request.data['ToDate']
+@api_view(['POST'])
+def bp_due_payment(request):
+    # try:
+        CardCode = request.data['CardCode']
+        OrderByName  = str(request.data['OrderByName']).strip()
+        OrderByAmt   = str(request.data['OrderByAmt']).strip()
+        DueDaysGroup = request.data['DueDaysGroup']
+        PageNo       = request.data['PageNo']
+        MaxSize      = request.data['MaxSize']
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        dueDaysGroupQuery = "AND `DueDate` >= CURDATE()"
+        if str(DueDaysGroup) == '-1': # overdue invoices
+            dueDaysGroupQuery = "AND `DueDate` < CURDATE()"
+        elif DueDaysGroup != "": # due date in next DueDaysGroup
+            dueDaysGroupQuery = f"AND `DueDate` >= CURDATE() AND `DueDate` <= DATE_ADD(CURDATE(), INTERVAL {DueDaysGroup} DAY)"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        dataContext = []
+        totalPendingsByBp = 0
+        dataList = []
+        dataListTotal = 0
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        orderby = ""
+        if str(OrderByName).lower() == 'a-z':
+            orderby = "Order By CardName asc"
+        elif str(OrderByName).lower() == 'z-a':
+            orderby = "Order By CardName desc"
+        elif str(OrderByAmt).lower() == 'asc':
+            orderby = "Order By TotalDue asc"
+        elif str(OrderByAmt).lower() == 'desc':
+            orderby = "Order By TotalDue desc"
+        else:
+            orderby = "Order By DocDate asc"    
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
+        mycursor = mydb.cursor(dictionary=True, buffered=True)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         
-#         dataContext = []
-#         # docEntrys = []
-#         # totalSalesByBp = 0
-#         # totalPaymentsByBp = 0
-#         totalPendingsByBp = 0
-#         allCreditNote = 0
-#         allbpJELine = 0
-#         BPData = []
-#         dataList = []
-#         dataListTotal = 0
+        # for one bp Receipt and Pending
+        if BusinessPartner.objects.filter(CardCode = CardCode).exists():
+            # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            bpobj = BusinessPartner.objects.filter(CardCode = CardCode).first()
 
-#         OrderByName = "" #a-z/z-a
-#         OrderByAmt = "desc" #desc
-#         if 'OrderByName' in request.data:
-#             OrderByName = str(request.data['OrderByName']).strip()
-#         if 'OrderByAmt' in request.data:
-#             OrderByAmt = str(request.data['OrderByAmt']).strip()
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         orderby = ""
-#         if str(OrderByName).lower() == 'a-z':
-#             orderby = "Order By CardName asc"
-#         elif str(OrderByName).lower() == 'z-a':
-#             orderby = "Order By CardName desc"
-#         elif str(OrderByAmt).lower() == 'asc':
-#             orderby = "Order By TotalDue asc"
-#         elif str(OrderByAmt).lower() == 'desc':
-#             orderby = "Order By TotalDue desc"
-#         else:
-#             orderby = "Order By TotalDue asc"
-
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         DueDaysGroup = ''
-#         if 'DueDaysGroup' in request.data:
-#             DueDaysGroup = request.data['DueDaysGroup']
-#         # endif
-#         overDuesQuery = ""
-#         if DueDaysGroup != "":
-#             overDuesQuery = f"AND DueDaysGroup = '{DueDaysGroup}'"
-    
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
-#         mycursor = mydb.cursor(dictionary=True, buffered=True)
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        
-#         # for one bp Receipt and Pending
-#         if BusinessPartner.objects.filter(CardCode = CardCode).exists():
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             bpobj = BusinessPartner.objects.filter(CardCode = CardCode).first()
-#             # PayTermsGrpCode = bpobj.PayTermsGrpCode
-#             # CreditLimit = bpobj.CreditLimit
-#             # GroupCode = bpobj.GroupCode
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             # MobileNo = ""
-#             # if BPEmployee.objects.filter(CardCode = CardCode, FirstName = bpobj.ContactPerson).exists():
-#             #     bpEmp = BPEmployee.objects.filter(CardCode = CardCode, FirstName = bpobj.ContactPerson).first()
-#             #     MobileNo = bpEmp.MobilePhone 
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             # GroupName = ""
-#             # if BusinessPartnerGroups.objects.filter(Code = GroupCode).exists():
-#             #     bpGroup = BusinessPartnerGroups.objects.filter(Code = GroupCode).first()
-#             #     GroupName = bpGroup.Name
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             # ptgcObj = PaymentTermsTypes.objects.filter(GroupNumber = PayTermsGrpCode).first()
-#             # creditLimitDayes = ptgcObj.PaymentTermsGroupName
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             # GSTIN = ""
-#             # BPAddress = ""
-#             # if BPBranch.objects.filter(BPCode = CardCode).exists():
-#             #     bpBranch = BPBranch.objects.filter(BPCode = CardCode).first()
-#             #     GSTIN = str(bpBranch.GSTIN)
-#             #     BPAddress = f"{bpBranch.Street} {bpBranch.City} {bpBranch.ZipCode}"
-#             # # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-          
-
-#             sqlSelectReceiable = f"""
-#                 SELECT * FROM `BusinessPartner_receivable`
-#                 WHERE
-#                     CardCode = '{CardCode}'
-#                     AND `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1
-#                     {overDuesQuery}
-#                 {orderby}
-#             """
-#                 # {limitQuery};
-
-#             ContactPerson   = ""
-#             EmailAddress    = ""
-#             Phone1          = ""
-#             GSTIN           = ""
-#             BPAddress       = ""
-#             CreditLimit     = ""
-#             CreditLimitDayes = ""
-#             GroupName       = ""
+            sqlSelectReceiable = f"""
+                SELECT *, `TotalDue` as TotalPending FROM `BusinessPartner_receivable`
+                WHERE
+                    CardCode = '{CardCode}' AND
+                    `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1 
+                    {dueDaysGroupQuery}
+                {orderby}
+            """
+            ContactPerson    = ""
+            EmailAddress     = ""
+            MobileNo         = ""
+            GSTIN            = ""
+            BPAddress        = ""
+            CreditLimit      = ""
+            CreditLimitDayes = ""
+            GroupName        = ""
                 
-#             print(sqlSelectReceiable)
-#             mycursor.execute(sqlSelectReceiable)
-#             orderList = mycursor.fetchall()      
-#             if len(orderList) != 0:
-#                 for order in orderList:
-#                     DocEntry      = order['DocEntry']
-#                     TransId       = order['TransId']
-#                     TransType     = order['TransType']
-#                     PendingTotal  = round(float(order['TotalDue']), 2)
-#                     DueDaysGroup  = order['DueDaysGroup']
-#                     DocDate       = order['DocDate']
-#                     # DocDueDate    = order['DueDate']
+            print(sqlSelectReceiable)
+            mycursor.execute(sqlSelectReceiable)
+            orderList = mycursor.fetchall()      
+            if len(orderList) != 0:
+                for order in orderList:
+                    DocEntry      = order['DocEntry']
+                    DocNum        = order['DocNum']
+                    TransId       = order['TransId']
+                    TransType     = order['TransType']
+                    PendingTotal  = round(float(order['TotalDue']), 2)
+                    DueDaysGroup  = order['DueDaysGroup']
+                    DocDate       = order['DocDate']
+                    DocDueDate    = order['DueDate']
 
-#                     ContactPerson   = order['ContactPerson']
-#                     EmailAddress    = order['EmailAddress']
-#                     MobileNo          = order['MobileNo']
-#                     GSTIN           = order['GSTIN']
-#                     BPAddress       = order['BPAddresses']
-#                     CreditLimit     = order['CreditLimit']
-#                     CreditLimitDayes = order['CreditLimitDayes']
-#                     GroupName       = order['GroupName']
+                    ContactPerson = order['ContactPerson']
+                    EmailAddress  = order['EmailAddress']
+                    MobileNo      = order['MobileNo']
+                    GSTIN         = order['GSTIN']
+                    BPAddress     = order['BPAddresses']
+                    CreditLimit   = order['CreditLimit']
+                    CreditLimitDayes = order['CreditLimitDayes']
+                    GroupName     = order['GroupName']
+
+                    OverDueDays     = order['OverDueDays']
                     
-#                     PaymentStatus = "Unpaid"
+                    PaymentStatus = "Unpaid"
 
-#                     print("DocEntry", DocEntry, "TransType", TransType)
-#                     if float(PendingTotal) != 0:
-
-#                         if str(TransType) == 'Invoice':
-#                             if Invoice.objects.filter(DocEntry = DocEntry).exists():
-#                                 invObj = Invoice.objects.filter(DocEntry = DocEntry).first()
-#                                 DocTotal = invObj.DocTotal
-#                                 DocDate = invObj.DocDate
-#                                 DocDueDate = invObj.DocDueDate
-
-#                                 if float(DocTotal) - float(PendingTotal) > 0:
-#                                     PaymentStatus = "Partially Paid"
-#                                 else:
-#                                     PaymentStatus = "Unpaid"
-
-#                                 todays_date = date.today()
-#                                 due_object = datetime.strptime(DocDate, '%Y-%m-%d').date()
-
-#                                 overDueDays = 0
-#                                 if todays_date < due_object:
-#                                     overDueDays = 0
-#                                 else:
-#                                     diffDate = todays_date - due_object 
-#                                     overDueDays = diffDate.days
-                                
-#                                 bpData = {
-#                                     "OrderId": invObj.id,
-#                                     "DocEntry": DocEntry,
-#                                     "DocDueDate": DocDueDate,
-#                                     "OrderAmount": DocTotal,
-#                                     "OverDueDays": overDueDays,
-#                                     "CreateDate": DocDate,
-#                                     "PaymentStatus": PaymentStatus,
-#                                     "TotalReceivePayment": 0,
-#                                     "DifferenceAmount":round(float(PendingTotal), 2)
-#                                 }                    
-#                                 dataContext.append(bpData)
-#                                 totalPendingsByBp = totalPendingsByBp + float(PendingTotal)
-#                             # endif
-#                         elif str(TransType) == 'JE':
-#                             if JournalEntries.objects.filter(JdtNum = DocEntry).exists():
-#                                 invObj = JournalEntries.objects.filter(JdtNum = DocEntry).first()
-#                                 tempData = {
-#                                     'id': invObj.id,
-#                                     'DocNum': DocEntry,
-#                                     'DocTotal': PendingTotal,
-#                                     'DocDate': DocDate,
-#                                     'DocType': "ttJournalEntry"
-#                                 }
-#                                 dataList.append(tempData)
-#                                 dataListTotal = dataListTotal + PendingTotal
-#                             # endif
-#                         elif str(TransType) == 'A/R Credit Memo':
-#                             print("creditNote", DocEntry)
-#                             if CreditNotes.objects.filter(DocEntry = DocEntry).exists():
-#                                 invObj = CreditNotes.objects.filter(DocEntry = DocEntry).first()
-#                                 DocTotal = invObj.DocTotal
-#                                 DocDate = invObj.DocDate
-#                                 DocDueDate = invObj.DocDueDate
-#                                 tempData = {
-#                                     'id': invObj.id,
-#                                     'DocNum': invObj.DocNum,
-#                                     'DocTotal': (PendingTotal),
-#                                     'DocDate': DocDate,
-#                                     'DocType': "ttARCredItnote"
-#                                 }
-#                                 dataList.append(tempData)
-#                                 dataListTotal = dataListTotal + PendingTotal
-#                             # endif
-#                         elif str(TransType) == 'Incoming':
-#                             if IncomingPayments.objects.filter(DocEntry = DocEntry).exists():
-#                                 invObj = IncomingPayments.objects.filter(DocEntry = DocEntry).first()
-#                                 DocDate = invObj.DocDate
-#                                 # DocDueDate = invObj.DocDueDate
-#                                 tempData = {
-#                                     'id': invObj.id,
-#                                     'DocNum': invObj.DocNum,
-#                                     'DocTotal': PendingTotal,
-#                                     'DocDate': DocDate,
-#                                     'DocType': "ttReceipt"
-#                                 }
-#                                 dataList.append(tempData)
-#                                 dataListTotal = dataListTotal + PendingTotal
-#                             # endif
-#                         elif str(TransType) == 'outgoing':
-#                             if VendorPayments.objects.filter(DocEntry = DocEntry).exists():
-#                                 invObj = VendorPayments.objects.filter(DocEntry = DocEntry).first()
-#                                 DocDate = invObj.DocDate
-#                                 # DocDueDate = invObj.DocDueDate
-#                                 tempData = {
-#                                     'id': invObj.id,
-#                                     'DocNum': invObj.DocNum,
-#                                     'DocTotal': PendingTotal,
-#                                     'DocDate': DocDate,
-#                                     'DocType': "ttVendorPayment"
-#                                 }
-#                                 dataList.append(tempData)
-#                                 dataListTotal = dataListTotal + PendingTotal
-#                             # endif
-#                         else:
-#                             print('no match found')
-#                         # endelif
+                    print("DocEntry", DocEntry, "TransType", TransType)
+                    if str(TransType) == 'Invoice':
                         
-#                     # endif
-#                 # end for
-#             # endif
+                        PaymentStatus = "Unpaid"                        
+                        bpData = {
+                            "OrderId": DocEntry,
+                            "DocEntry": DocNum,
+                            "DocDueDate": DocDueDate,
+                            "OrderAmount": 0,
+                            "OverDueDays": OverDueDays,
+                            "CreateDate": DocDate,
+                            "PaymentStatus": PaymentStatus,
+                            "TotalReceivePayment": 0,
+                            "DifferenceAmount":round(float(PendingTotal), 2)
+                        }                    
+                        dataContext.append(bpData)
+                        totalPendingsByBp = totalPendingsByBp + float(PendingTotal)
 
-#             AvgPayDays = 0
-
-#             BPData = [{
-#                 "CardName": bpobj.CardName,
-#                 "CardCode": bpobj.CardCode,
-#                 "EmailAddress": EmailAddress,
-#                 "ContactPerson": ContactPerson,
-#                 "Phone1": MobileNo, 
-#                 "GSTIN": GSTIN,
-#                 "BPAddress": BPAddress,
-#                 "GroupName": GroupName,
-#                 "CreditLimit": CreditLimit,
-#                 "CreditLimitDayes": CreditLimitDayes,
-#                 "AvgPayDays": AvgPayDays
-#             }]
-#         else:
-#             return Response({"message": "Invalid CardCode","status": 201, "data":[], "TotalSales": 0})
-
-#         TotalSales = 0
-#         TotalReceivePayment = 0
-#         DifferenceAmount = round(float(totalPendingsByBp), 2)
-
-#         print("TotalSales", TotalSales, "allCreditNote", allCreditNote, "allbpJELine", allbpJELine)
-#         if 'PageNo' in request.data:
-#             PageNo = int(request.data['PageNo'])
-#             MaxSize = request.data['MaxSize']
-#             if MaxSize != "All":
-#                 size = int(MaxSize)
-#                 endWith = (PageNo * size)
-#                 startWith = (endWith - size)
-#                 dataContext = dataContext[startWith:endWith]
-
-#         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount, "BPData": BPData, "DataListTotal": dataListTotal, "DataList": dataList})
-#     # except Exception as e:
-#     #     return Response({"message": str(e),"status": 201,"data":[]})
-
-
-
-
-
-# # bp list with total purchase
-# @api_view(['POST'])
-# def bp_receivable_old(request):
-#     # try:
-#         CardCode = request.data['CardCode']
-#         SalesType = request.data['Type'] # Gross/Net
-#         FromDate = request.data['FromDate']
-#         ToDate = request.data['ToDate']
-        
-#         dataContext = []
-#         docEntrys = []
-#         totalSalesByBp = 0
-#         totalPaymentsByBp = 0
-#         # totalSales = 0
-#         allCreditNote = 0
-#         allbpJELine = 0
-#         BPData = []
-#         dataList = []
-#         dataListTotal = 0
-#         # for one bp Receipt and Pending
-#         if BusinessPartner.objects.filter(CardCode = CardCode).exists():
-#             # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             bpobj = BusinessPartner.objects.filter(CardCode = CardCode).first()
-#             PayTermsGrpCode = bpobj.PayTermsGrpCode
-#             CreditLimit = bpobj.CreditLimit
-#             ptgcObj = PaymentTermsTypes.objects.filter(GroupNumber = PayTermsGrpCode).first()
-#             creditLimitDayes = ptgcObj.PaymentTermsGroupName
-#             GroupCode = bpobj.GroupCode
-#             GroupName = ""
-#             if BusinessPartnerGroups.objects.filter(Code = GroupCode).exists():
-#                 bpGroup = BusinessPartnerGroups.objects.filter(Code = GroupCode).first()
-#                 GroupName = bpGroup.Name
-
-#             GSTIN = ""
-#             BPAddress = ""
-#             if BPBranch.objects.filter(BPCode = CardCode).exists():
-#                 bpBranch = BPBranch.objects.filter(BPCode = CardCode).first()
-#                 GSTIN = str(bpBranch.GSTIN)
-#                 BPAddress = f"{bpBranch.Street} {bpBranch.City} {bpBranch.ZipCode}"
-#             # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             noOfInv = 1
-#             payDays = 1
-
-#             orderList = []
-#             if str(FromDate) != "":
-#                 orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate, DocumentStatus = 'bost_Open').values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocumentStatus", "DocDueDate", "DocDate", "DiscountPercent", "PaidToDateSys").order_by('DocDate')
-#             else:
-#                 orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode, DocumentStatus = 'bost_Open').values("id","DocTotal", "CreateDate", "VatSum", "DocEntry", "DocumentStatus", "DocDueDate", "DocDate", "DiscountPercent", "PaidToDateSys").order_by('DocDate')
-                    
-#             #print("Length of objects orderList: ", len(orderList))
-#             if len(orderList) != 0:
-#                 for order in orderList:
-#                     allPaymentsListBP = []                    
-
-#                     docEntrys.append(order['DocEntry'])
-#                     DocTotal = order['DocTotal']
-#                     VatSum = order['VatSum']
-#                     # DocumentStatus = order['DocumentStatus']
-#                     DocEntry = order['DocEntry']
-#                     DocDueDate = order['DocDueDate']
-#                     PaymentStatus = "Unpaid"
-#                     PaidToDateSys = order['PaidToDateSys']
-                    
-#                     if str(VatSum) == "":
-#                         VatSum = 0
+                    elif str(TransType) == 'JE':
+                        tempData = {
+                            'id': DocEntry,
+                            'DocNum': DocNum,
+                            'DocTotal': PendingTotal,
+                            'DocDate': DocDate,
+                            'DocType': "ttJournalEntry"
+                        }
+                        dataList.append(tempData)
+                        dataListTotal = dataListTotal + PendingTotal
+                    elif str(TransType) == 'A/R Credit Memo':
+                        tempData = {
+                            'id': DocEntry,
+                            'DocNum': DocNum,
+                            'DocTotal': (PendingTotal),
+                            'DocDate': DocDate,
+                            'DocType': "ttARCredItnote"
+                        }
+                        dataList.append(tempData)
+                        dataListTotal = dataListTotal + PendingTotal
+                    elif str(TransType) == 'Incoming':
+                        tempData = {
+                            'id': DocEntry,
+                            'DocNum': DocNum,
+                            'DocTotal': PendingTotal,
+                            'DocDate': DocDate,
+                            'DocType': "ttReceipt"
+                        }
+                        dataList.append(tempData)
+                        dataListTotal = dataListTotal + PendingTotal
+                    elif str(TransType) == 'outgoing':
                         
-#                     InvId = order['id']
-#                     DiscountPercent = float(order['DiscountPercent'])
-#                     if str(SalesType).lower() == "net":
-#                         BaseTotal = 0
-#                         itemObjs = DocumentLines.objects.filter(InvoiceID = InvId).values("id","LineTotal")
-#                         for itObjs in itemObjs:
-#                             LineTotal = float(itObjs['LineTotal'])
-#                             BaseTotal = BaseTotal + LineTotal
-#                         disAmt = 0
-#                         print('netAmt befour dicount',order['DocEntry'], BaseTotal)
-#                         if BaseTotal != 0:
-#                             if float(DiscountPercent) != 0.0:
-#                                 disAmt = (BaseTotal * DiscountPercent) / 100
-#                         DocTotal = round(float(BaseTotal - disAmt), 2)
-#                         print('netAmt after dicount',order['DocEntry'], DocTotal)
+                        tempData = {
+                            'id': DocEntry,
+                            'DocNum': DocNum,
+                            'DocTotal': PendingTotal,
+                            'DocDate': DocDate,
+                            'DocType': "ttVendorPayment"
+                        }
+                        dataList.append(tempData)
+                        dataListTotal = dataListTotal + PendingTotal
+                    else:
+                        print('no match found')
+                    # endelif
+                # end for
+            # endif
 
-                    
-#                     totalPaymentsByBp = totalPaymentsByBp + float(PaidToDateSys)
-#                     totalSalesByBp = totalSalesByBp + float(DocTotal)
+            AvgPayDays = 0
 
-#                     if float(PaidToDateSys) > 0:
-#                         PaymentStatus = "Partially Paid"
-#                     else:
-#                         PaymentStatus = "Unpaid"
+            BPData = [{
+                "CardName": bpobj.CardName,
+                "CardCode": bpobj.CardCode,
+                "EmailAddress": EmailAddress,
+                "ContactPerson": ContactPerson,
+                "Phone1": MobileNo, 
+                "GSTIN": GSTIN,
+                "BPAddress": BPAddress,
+                "GroupName": GroupName,
+                "CreditLimit": CreditLimit,
+                "CreditLimitDayes": CreditLimitDayes,
+                "AvgPayDays": AvgPayDays
+            }]
+        else:
+            return Response({"message": "Invalid CardCode","status": 201, "data":[], "TotalSales": 0})
 
-#                     todays_date = date.today()
-#                     due_object = datetime.strptime(DocDueDate, '%Y-%m-%d').date()
+        TotalSales = 0
+        TotalReceivePayment = 0
+        DifferenceAmount = round(float(totalPendingsByBp), 2)
 
-#                     overDueDays = 0
-#                     if todays_date < due_object:
-#                         overDueDays = 0
-#                     else:
-#                         diffDate = due_object - todays_date
-#                         overDueDays = diffDate.days
-                    
-#                     bpData = {
-#                         "OrderId": order['id'],
-#                         "DocEntry": DocEntry,
-#                         "DocDueDate": DocDueDate,
-#                         "OrderAmount": DocTotal,
-#                         "OverDueDays": overDueDays,
-#                         "CreateDate": order['DocDate'],
-#                         # "TotalSales": round(totalSalesByBp, 2),
-#                         "PaymentStatus": PaymentStatus,
-#                         "TotalReceivePayment":round(float(PaidToDateSys), 2),
-#                         "DifferenceAmount":round(float(float(DocTotal) - float(PaidToDateSys)), 2)
-#                     }                    
-#                     dataContext.append(bpData)
+        if 'PageNo' in request.data:
+            PageNo = int(request.data['PageNo'])
+            MaxSize = request.data['MaxSize']
+            if MaxSize != "All":
+                size = int(MaxSize)
+                endWith = (PageNo * size)
+                startWith = (endWith - size)
+                dataContext = dataContext[startWith:endWith]
 
-#                     if IncomingPaymentInvoices.objects.filter(InvoiceDocEntry = DocEntry).exists():
-#                         invIncPay = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry = DocEntry).values('id','DocDate').first()
-#                         CreateDate = datetime.strptime(order['DocDate'], '%Y-%m-%d')
-#                         DocDate = datetime.strptime(invIncPay['DocDate'], '%Y-%m-%d')
-#                         DocDate - CreateDate
-#                         dayCount = DocDate - CreateDate
+        return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount, "BPData": BPData, "DataListTotal": dataListTotal, "DataList": dataList})
+    # except Exception as e:
+    #     return Response({"message": str(e),"status": 201,"data":[]})
 
-#                         payDays = payDays + dayCount.days
-#                         noOfInv = noOfInv+1
-#                     # endif
-#                 # end for
-#             # endif
-#             AvgPayDays = (payDays/noOfInv)
-
-            
-#             # ##################
-#             # CreditNote
-#             # ##################
-#             allCreditNoteList = []
-#             if str(FromDate) != "":
-#                 # allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values_list('DocTotal', flat=True)
-#                 allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values('id', 'DocNum', 'DocTotal', 'DocDate', 'PaidToDateSys')
-#             else:
-#                 # allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode).values_list('DocTotal', flat=True)
-#                 allCreditNoteList = CreditNotes.objects.filter(DocumentStatus = 'bost_Open', CancelStatus="csNo", CardCode = CardCode).values('id', 'DocNum', 'DocTotal', 'DocDate', 'PaidToDateSys')
-            
-#             bpCreditNote = 0
-#             for item2 in allCreditNoteList:
-#                 DocTotal = abs(float(item2['DocTotal']) - float(item2['PaidToDateSys']))
-#                 tempData = {
-#                     'id': item2['id'],
-#                     'DocNum': item2['DocNum'],
-#                     'DocTotal': -abs(DocTotal),
-#                     'DocDate': item2['DocDate'],
-#                     'DocType': "ttARCredItnote"
-#                 }
-#                 dataList.append(tempData)
-#                 bpCreditNote += float(DocTotal)
-#             allCreditNote += bpCreditNote
-
-#             # ##################
-#             # JournalEntry
-#             # ##################
-#             jeLineList = []
-#             if str(FromDate) != "":
-#                 jeLineList = JournalEntryLines.objects.raw(f"SELECT `JournalEntries_journalentries`.`id`, `JournalEntries_journalentries`.`JdtNum`, `JournalEntries_journalentries`.`ReferenceDate`, `JournalEntries_journalentrylines`.`Debit`, `JournalEntries_journalentrylines`.`Credit`, `JournalEntries_journalentrylines`.`Line_ID` FROM `JournalEntries_journalentrylines`, `JournalEntries_journalentries` WHERE `JournalEntries_journalentrylines`.`JournalEntriesId` = `JournalEntries_journalentries`.id AND `JournalEntries_journalentries`.`U_Cancel` = 'N' AND `ShortName`= '{CardCode}' AND `JournalEntries_journalentries`.`OriginalJournal` = 'ttJournalEntry' AND `JournalEntries_journalentries`.`ReferenceDate` => '{FromDate}' AND `JournalEntries_journalentries`.`ReferenceDate` <= '{ToDate}'")
-#             else:
-#                 jeLineList = JournalEntryLines.objects.raw(f"SELECT `JournalEntries_journalentries`.`id`, `JournalEntries_journalentries`.`JdtNum`, `JournalEntries_journalentries`.`ReferenceDate`, `JournalEntries_journalentrylines`.`Debit`, `JournalEntries_journalentrylines`.`Credit`, `JournalEntries_journalentrylines`.`Line_ID` FROM `JournalEntries_journalentrylines`, `JournalEntries_journalentries` WHERE `JournalEntries_journalentrylines`.`JournalEntriesId` = `JournalEntries_journalentries`.id AND `JournalEntries_journalentries`.`U_Cancel` = 'N' AND `ShortName`= '{CardCode}' AND `JournalEntries_journalentries`.`OriginalJournal` = 'ttJournalEntry'")
-
-#             bpJELineTotal = 0
-#             print(jeLineList.query)
-#             if len(jeLineList) > 0:
-#                 for line in jeLineList:
-#                     ReconSum = 0
-
-#                     DocTotal = float(line.Debit) - float(line.Credit)
-#                     # print("befour", DocTotal)
-#                     reconcileAMt = 0
-#                     # sacAPIRsponse = requests.get(f"http://65.2.148.88:8000/Ledure/General/Reconcilation.xsjs?DBName=LEDURE_LIVE_300323&TranId={line.JdtNum}", verify=False)
-#                     # sacAPIRsponse = requests.get(f"http://65.2.148.88:8000/Ledure/General/Reconcilation.xsjs?DBName=LEDURE_LIVE_300323&TranId={line.JdtNum}&ShortName={CardCode}", verify=False)
-#                     sapUrl = f"http://65.2.148.88:8000/Ledure/General/Reconcilation.xsjs?DBName=LEDURE_LIVE_300323&TranId={line.JdtNum}&ShortName={CardCode}&LineId={line.Line_ID}"
-#                     sacAPIRsponse = requests.get(sapUrl, verify=False)
-#                     rsponseJson = json.loads(sacAPIRsponse.text)
-#                     # print(rsponseJson)
-#                     rsponseData = rsponseJson['value']
-#                     if len(rsponseData) > 0:
-#                         for recoObj in rsponseData:
-#                             # ReconSum = recoObj['ReconSum']
-#                             ReconSum = ReconSum + float(recoObj['ReconSum'])
-                            
-#                         # if float(rsponseData[0]['Debit']) != 0:
-#                         if float(line.Debit) != 0:
-#                             DocTotal = abs(DocTotal) - float(ReconSum)
-#                         else:
-#                             DocTotal = DocTotal + float(ReconSum)
-
-#                     # print("after", DocTotal)
-#                     if abs(DocTotal) > 0:
-#                         # print(sapUrl)
-
-#                         tempData = {
-#                             'id': line.id,
-#                             'DocNum': line.JdtNum,
-#                             'DocTotal': DocTotal,
-#                             'DocDate': line.ReferenceDate,
-#                             'DocType': "ttJournalEntry"
-#                         }
-#                         dataList.append(tempData)
-                        
-#                         # print("line.Debit", line.Debit, "line.Credit", line.Credit)
-#                         bpJELineTotal = bpJELineTotal + float(DocTotal)
-#                         # bpJELineTotal = bpJELineTotal + float(line.Debit)
-#                         # bpJELineTotal = bpJELineTotal - float(line.Credit)
-#                         # bpJELineTotal = bpJELineTotal - float(ReconSum)
-
-#                         print("endfor", bpJELineTotal)
-#                     # endif
-#                     # print('---endfor----')
-#                 # endfor
-#             # endif
-#             allbpJELine += bpJELineTotal
-#             # print("allCreditNote", allCreditNote, "allbpJELine", allbpJELine)
-#             dataListTotal = float(allbpJELine) - float(allCreditNote) 
-#             # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#             BPData = [{
-#                 "CardName": bpobj.CardName,
-#                 "CardCode": bpobj.CardCode,
-#                 "EmailAddress": bpobj.EmailAddress,
-#                 "ContactPerson": bpobj.ContactPerson,
-#                 "Phone1": bpobj.Phone1,
-#                 "GSTIN": GSTIN,
-#                 "BPAddress": BPAddress,
-#                 "GroupName": GroupName,
-#                 "CreditLimit": CreditLimit,
-#                 "CreditLimitDayes": creditLimitDayes,
-#                 "AvgPayDays": AvgPayDays
-                
-#             }]
-#             # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         else:
-#             return Response({"message": "Invalid CardCode","status": 201, "data":[], "TotalSales": 0})
-
-#         TotalSales = round(totalSalesByBp, 2)
-#         TotalReceivePayment = round(totalPaymentsByBp, 2)
-#         # DifferenceAmount = abs(round(float(float(totalSalesByBp) - float(totalPaymentsByBp) - float(allCreditNote) + float(allbpJELine)), 2))
-#         DifferenceAmount = round(float(float(totalSalesByBp) - float(totalPaymentsByBp)), 2)
-
-
-#         if 'PageNo' in request.data:
-#             PageNo = int(request.data['PageNo'])
-#             MaxSize = request.data['MaxSize']
-#             if MaxSize != "All":
-#                 size = int(MaxSize)
-#                 endWith = (PageNo * size)
-#                 startWith = (endWith - size)
-#                 dataContext = dataContext[startWith:endWith]
-
-#         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount, "BPData": BPData, "DataListTotal": dataListTotal, "DataList": dataList})
-#     # except Exception as e:
-#     #     return Response({"message": str(e),"status": 201,"data":[]})
-
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bp list with total payment receipt
 @api_view(['POST'])
 def receipt_dashboard(request):
@@ -3565,102 +2770,8 @@ def receipt_dashboard(request):
         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount":0})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-
-# # bp list with total payment receipt
-# @api_view(['POST'])
-# def receipt_dashboard_old(request):
-#     try:
-#         SalesType = request.data['Type']
-#         FromDate = request.data['FromDate']
-#         ToDate = request.data['ToDate']
-
-#         SalesPersonCode = -1
-#         if 'SalesPersonCode' in request.data:
-#             SalesPersonCode = request.data['SalesPersonCode']
-#         zones = getZoneByEmployee(SalesPersonCode)
-
-#         SearchText = ""
-#         if 'SearchText' in request.data:
-#             SearchText = request.data['SearchText']
-
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         OrderByName = "a-z" #a-z/z-a
-#         OrderByAmt = "asc" #desc
-#         if 'OrderByName' in request.data:
-#             OrderByName = str(request.data['OrderByName']).strip()
-#         if 'OrderByAmt' in request.data:
-#             OrderByAmt = str(request.data['OrderByAmt']).strip()
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#         orderby = "CardName"
-#         if str(OrderByName) == 'z-a':
-#             orderby = "-CardName"
-        
-#         orderbyAmt = False
-#         if str(OrderByAmt) == 'desc':
-#             orderbyAmt = False
-#         else:
-#             orderbyAmt = True
-#         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-#         cardCodeList = []
-#         if str(FromDate) != "":
-#             cardCodeList = list(IncomingPayments.objects.filter(DocDate__gte = FromDate, DocDate__lte = ToDate).exclude(JournalRemarks = 'Canceled').values_list('CardCode', flat=True).distinct())
-#         else:
-#             cardCodeList = list(IncomingPayments.objects.all().exclude(JournalRemarks = 'Canceled').values_list('CardCode', flat=True).distinct())
-
-#         bpObjs = []
-        
-#         bpObjs = BusinessPartner.objects.filter(Q(CardCode__in = cardCodeList, U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText)) ).values("id", "CardCode", "CardName").order_by(orderby)
-        
-#         dataContext = []
-#         docEntrys = []
-#         totalSales = 0
-#         if 'PageNo' in request.data:
-#             PageNo = int(request.data['PageNo'])
-#             MaxSize = request.data['MaxSize']
-#             if MaxSize != "All":
-#                 size = int(MaxSize)
-#                 endWith = (PageNo * size)
-#                 startWith = (endWith - size)
-#                 bpObjs = bpObjs[startWith:endWith]
-                
-#         for bpobj in bpObjs:
-#             orderList = []
-#             if str(FromDate) != "":
-#                 orderList = IncomingPayments.objects.filter(CardCode = bpobj['CardCode'], DocDate__gte = FromDate, DocDate__lte = ToDate).exclude(JournalRemarks = 'Canceled').order_by('-id')
-#             else:
-#                 orderList = IncomingPayments.objects.filter(CardCode = bpobj['CardCode']).exclude(JournalRemarks = 'Canceled').order_by('-id')
-            
-#             if len(orderList) != 0:
-#                 totalSalesByBp = 0 
-#                 BPdocEntrys=[]
-#                 for order in orderList:
-#                     BPdocEntrys.append(order.DocEntry)
-#                     docEntrys.append(order.DocEntry)
-#                     DocTotal = order.TransferSum
-#                     totalSalesByBp = totalSalesByBp + float(DocTotal)
-#                 # endfor
-#                 bpData = {
-#                     "CardName": bpobj['CardName'],
-#                     "CardCode": bpobj['CardCode'],
-#                     "TotalSales": round(totalSalesByBp, 2),#totalSalesByBp
-#                     "TotalReceivePayment":round(totalSalesByBp, 2),
-#                     "PaymentStatus": "",
-#                     "DifferenceAmount":0
-#                 }
-#                 dataContext.append(bpData)
-#                 totalSales = float(totalSales) + float(totalSalesByBp)
-#             # endif
-#         # endfor
-        
-#         TotalSales = totalSales
-#         TotalReceivePayment = round(totalSales, 2)
-#         #DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
-
-#         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount":0})
-#     except Exception as e:
-#         return Response({"message": str(e),"status": 201,"data":[]})
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bp list with total payment receipt
 @api_view(['POST'])
 def bp_receipt(request):
@@ -3802,81 +2913,8 @@ def bp_receipt(request):
         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "BPData":BPDataa})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-
-
-# bp list with total payment receipt
-@api_view(['POST'])
-def bp_receipt_old(request):
-    try:
-        CardCode = request.data['CardCode']
-        SalesType = request.data['Type'] # Gross/Net
-        FromDate = request.data['FromDate']
-        ToDate = request.data['ToDate']
-        
-        dataContext = []
-        docEntrys = []
-        totalSales = 0
-        totalSalesByBp = 0
-
-        if BusinessPartner.objects.filter(CardCode = CardCode).exists():
-            orderList = []
-            if str(FromDate) != "":
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry").order_by('-id')
-            else:
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode).values("id","DocTotal", "CreateDate", "VatSum", "DocEntry").order_by('-id')
-            
-            #print("Length of objects orderList: ", len(orderList))
-            if len(orderList) != 0:
-                for order in orderList:
-                    
-                    docEntrys.append(order['DocEntry'])
-                    DocTotal = order['DocTotal']
-                    VatSum = order['VatSum']
-                    #print(SalesType, DocTotal, VatSum)
-
-                    if str(VatSum) == "":
-                        #print("if vat empty:", VatSum)
-                        VatSum = 0
-                        
-                    if str(SalesType).lower() == "net":
-                        #print("if SalesType net ", VatSum)
-                        DocTotal = float(DocTotal) - float(VatSum)
-
-                    if IncomingPaymentInvoices.objects.filter(InvoiceDocEntry = order['DocEntry']).exists():
-                        bpData = {
-                            "OrderId": order['id'],
-                            "OrderAmount": order['DocTotal'],
-                            "PaymentStatus": "",
-                            "CreateDate": order['CreateDate']
-                        }                    
-                        dataContext.append(bpData)
-                    totalSalesByBp = totalSalesByBp + float(DocTotal)
-            else:
-                pass
-                #print('no invoice')
-        else:
-            return Response({"message": "Invalid CardCode","status": 201, "data":[], "TotalSales": 0})
-
-        allPaymentsList = []
-        if str(FromDate) != "":
-            allPaymentsList = IncomingPayments.objects.filter(CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).exclude(JournalRemarks = 'Canceled').values_list('TransferSum', flat=True)
-            # allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys, DocDate__gte = FromDate, DocDate__lte = ToDate).values_list('SumApplied', flat=True)
-        else:
-            allPaymentsList = IncomingPayments.objects.filter(CardCode = CardCode).exclude(JournalRemarks = 'Canceled').values_list('TransferSum', flat=True)
-            # allPaymentsList = IncomingPaymentInvoices.objects.filter(InvoiceDocEntry__in = docEntrys).values_list('SumApplied', flat=True)
-        
-        allPayment = 0
-        for item in allPaymentsList:
-            allPayment += float(item)
-
-        TotalSales = round(totalSalesByBp, 2)
-        TotalReceivePayment = round(allPayment, 2)
-        #DifferenceAmount = round(float(float(totalSalesByBp) - float(allPayment)), 2)
-
-        return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment})
-    except Exception as e:
-        return Response({"message": str(e),"status": 201,"data":[]})
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #BusinessPartner All selected field data API
 @api_view(["POST"])
 def all_data(request):
@@ -3894,7 +2932,8 @@ def all_data(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #BusinessPartner All selected field data API
 @api_view(["POST"])
 def all_data_pagination(request):
@@ -3970,55 +3009,8 @@ def all_data_pagination(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-
-#BusinessPartner All selected field data API
-@api_view(["POST"])
-def all_data_pagination_old(request):
-    try:
-        PageNo = int(request.data['PageNo'])
-        MaxSize = request.data['MaxSize']
-        SalesPersonCode = int(request.data['SalesPersonCode'])
-        zones = getZoneByEmployee(SalesPersonCode)
-        zonesStr = "','".join(zones)
-
-        # if Zones pass then data will be zones wise
-        if 'Zones' in request.data:
-            InputZones = request.data['Zones']
-            if str(InputZones).strip() != "":
-                zones = [InputZones]
-
-        print(zones)
-        result = []
-        if Employee.objects.filter(SalesEmployeeCode = SalesPersonCode).exists():
-            emp_obj = Employee.objects.get(SalesEmployeeCode = SalesPersonCode)
-            # if SalesPersonCode == 63:
-            if emp_obj.role == 'Director':
-                SalesPersonCode = -1
-
-            # allEmp = getAllReportingToIds(SalesPersonCode)
-            businesspartners_obj = []
-            if 'SearchText' in request.data:
-                SearchText = request.data['SearchText']
-                # businesspartners_obj = BusinessPartner.objects.filter( Q( Q(U_U_UTL_Zone__in = zones) & Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp) ) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) | Q(EmailAddress__icontains = SearchText) | Q(CustomerType__icontains = SearchText) | Q(Phone1__icontains = SearchText) ) 
-                businesspartners_obj = BusinessPartner.objects.filter( Q(U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText) | Q(EmailAddress__icontains = SearchText) | Q(CustomerType__icontains = SearchText) | Q(Phone1__icontains = SearchText) ) ).order_by("CardName")
-            else:
-                # businesspartners_obj = BusinessPartner.objects.filter( Q(U_U_UTL_Zone__in = zones) & Q(Q(SalesPersonCode__in = allEmp) | Q(CreatedBy__in = allEmp))).order_by("CardName")
-                businesspartners_obj = BusinessPartner.objects.filter(U_U_UTL_Zone__in = zones).order_by("CardName")
-
-            # print(businesspartners_obj.query)
-            if MaxSize != "All":
-                size = int(MaxSize)
-                endWith = (PageNo * size)
-                startWith = (endWith - size)
-                businesspartners_obj = businesspartners_obj[startWith:endWith]
-
-            result = BPSelectFieldSerializer(businesspartners_obj, many=True).data
-        else:
-            return Response({"message": "Invalid SalesPersonCode?","status": 201,"data":[]})
-        return Response({"message": "Success","status": 200,"data":result})
-    except Exception as e:
-        return Response({"message": str(e),"status": 201,"data":[]})
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # BusinessPartner Overview Dashboard
 @api_view(['POST'])
 def bp_overview(request):
@@ -4080,9 +3072,9 @@ def bp_overview(request):
             SalesList = []
             orderList = []
             if str(FromDate) != "":
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "DocDueDate", "DocDate", "VatSum", "DocEntry").order_by('-DocDate')
+                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode, DocDate__gte = FromDate, DocDate__lte = ToDate).values("id","DocTotal", "DocDueDate", "DocDate", "VatSum", "DocEntry").order_by('DocDate')
             else:
-                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode).values("id","DocTotal", "DocDueDate", "DocDate", "VatSum", "DocEntry").order_by('-DocDate')
+                orderList = Invoice.objects.filter(CancelStatus="csNo", CardCode = CardCode).values("id","DocTotal", "DocDueDate", "DocDate", "VatSum", "DocEntry").order_by('DocDate')
 
             for ord in orderList:
                 bpTotalSales = bpTotalSales + float(ord['DocTotal'])
@@ -4345,7 +3337,8 @@ def bp_overview(request):
             return Response({"message": "Invalid CardCode?","status": 201,"data":[]})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bp debit credit
 @api_view(['POST'])
 def bp_debit_credit(request):
@@ -4426,8 +3419,8 @@ def bp_debit_credit(request):
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
 
-
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # update Category Items and Uom
 @api_view(['GET'])
 def syncBP(request):
@@ -4439,16 +3432,6 @@ def syncBP(request):
         return Response({"message":"Successful","status":200, "data":[]})
     except Exception as e:
         return Response({"message":str(e),"status":201,"Model": "Items" ,"data":[]})
-
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-abc = {
-    "FromDate": "2023-01-01",
-    "ToDate": "2023-12-31",
-    "SalesPersonCode": -1
-}
-
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -4505,9 +3488,6 @@ def monthly_sales_chart(request):
         return Response({"message":str(e),"status":201,"Model": "Items" ,"data":[]})
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @api_view(['POST'])
 def monthly_receivable_chart(request):
     try:
@@ -4537,6 +3517,7 @@ def monthly_receivable_chart(request):
             LEFT JOIN BusinessPartner_receivable inv ON bp.CardCode = inv.CardCode
             WHERE
                 bp.U_U_UTL_Zone IN('{zonesStr}')
+                AND `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1
                 {fromToDate}
             GROUP BY MONTH(inv.DocDate)
         """
@@ -4553,6 +3534,55 @@ def monthly_receivable_chart(request):
                 finaldataSet[Month-4]['Year'] = Year
 
         return Response({"message":"Successful","status":200, "data":finaldataSet})
+    except Exception as e:
+        return Response({"message":str(e),"status":201,"Model": "Items" ,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@api_view(['POST'])
+def monthly_receivable_group_chart(request):
+    try:
+        print(request.data)
+        FromDate = request.data['FromDate']
+        ToDate = request.data['ToDate']
+        SalesPersonCode = request.data['SalesPersonCode']
+        zones = getZoneByEmployee(SalesPersonCode)
+        zonesStr = "','".join(zones)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
+        mycursor = mydb.cursor(dictionary=True, buffered=True)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        fromToDate = ""
+        if str(FromDate) != "":
+            fromToDate = f"AND DocDate >= '{FromDate}' AND DocDate <= '{ToDate}'"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        sqlReceivable = f"""
+            SELECT 
+                id,
+                ROUND(SUM(TotalDue), 2) as TotalDue,
+                CASE
+                    WHEN OverDueDays BETWEEN 0 AND 30 THEN '0-30'
+                    WHEN OverDueDays BETWEEN 31 AND 60 THEN '31-60'
+                    WHEN OverDueDays BETWEEN 61 AND 90 THEN '61-90'
+                    ELSE '>90'
+                END AS OverDueDaysGroup,
+                CASE
+                    WHEN OverDueDays BETWEEN 0 AND 30 THEN '30'
+                    WHEN OverDueDays BETWEEN 31 AND 60 THEN '60'
+                    WHEN OverDueDays BETWEEN 61 AND 90 THEN '90'
+                    ELSE '90+'
+                END AS OverDueDaysGroup2
+            FROM BusinessPartner_receivable
+            WHERE 
+                U_U_UTL_Zone IN('{zonesStr}')
+                AND `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1
+                {fromToDate}
+            GROUP BY OverDueDaysGroup
+            ORDER BY OverDueDaysGroup2 ASC;
+        """
+        print(sqlReceivable)
+        mycursor.execute(sqlReceivable)
+        monthlySalesData = mycursor.fetchall()
+        return Response({"message":"Successful","status":200, "data":monthlySalesData})
     except Exception as e:
         return Response({"message":str(e),"status":201,"Model": "Items" ,"data":[]})
 
@@ -4661,10 +3691,6 @@ def monthly_receipts_chart(request):
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # function to getMonthlyReportFromate
 def getMonthlyReportFromate(date):
     dateArr = date.split('-')
@@ -4743,9 +3769,6 @@ def getMonthlyReportFromate(date):
             },     
         ]
     return monSales
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -4765,7 +3788,6 @@ def first_last_dates_of_month(year, month_number):
     last_date = f"{year}-{month_number:02d}-{last_day}"
 
     return first_date, last_date
-
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

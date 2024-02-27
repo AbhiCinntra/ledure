@@ -574,29 +574,35 @@ def showBPReport(objs):
         allbp.append(finalBpData)
     return allbp
 
-
 # to get object of business_partner salesPersonCode, PaymentTerms and Business Type
 def showBP(objs):
     allbp = [];
     for obj in objs:
-        bpType       = obj.U_TYPE
-        cardCodeType = obj.CardCode
-        paymentType  = obj.PayTermsGrpCode
+        #print(obj.U_TYPE)
+        bpType = obj.U_TYPE
+        cardCodeType=obj.CardCode
+        paymentType = obj.PayTermsGrpCode
         salesPersonType = obj.SalesPersonCode
-        createdBy    = obj.CreatedBy
-        Unit         = obj.Unit
+        createdBy = obj.CreatedBy
+        Unit = obj.Unit
 
         bpjson = BusinessPartnerSerializer(obj)
         finalBpData = json.loads(json.dumps(bpjson.data))
 
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        # Business Partner GroupCode
         if BusinessPartnerGroups.objects.filter(Code = obj.GroupCode).exists():
             bpGroup = BusinessPartnerGroups.objects.filter(Code = obj.GroupCode).first()
             finalBpData['GroupName'] = bpGroup.Name
         else:
             finalBpData['GroupName'] = ""
 
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        # # Business Credit Limit by payment termstype
+        # if PaymentTermsTypes.objects.filter(GroupNumber = obj.PayTermsGrpCode).exists():
+        #     ptgcObj = PaymentTermsTypes.objects.filter(GroupNumber = obj.PayTermsGrpCode).first()
+        #     finalBpData['CreditLimitDayes'] = ptgcObj.PaymentTermsGroupName
+        # else:
+        #     finalBpData['CreditLimitDayes'] = ""
+
         # BP branch
         if Branch.objects.filter(BPLId = Unit).exists():
             unitObj = Branch.objects.get(BPLId = Unit)
@@ -604,50 +610,44 @@ def showBP(objs):
         else:
             finalBpData['UnitName'] = ""
         
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         # BP type 
-        if BPType.objects.filter(pk = bpType).exists():
+        if bpType != "":
             bpTypeObj = BPType.objects.filter(pk = bpType)
             bpTypejson = BPTypeSerializer(bpTypeObj, many = True)
             finalBpData['U_TYPE']=json.loads(json.dumps(bpTypejson.data))
         else:
             finalBpData['U_TYPE'] = []
             
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if PaymentTermsTypes.objects.filter(GroupNumber = paymentType).exists():
+        if paymentType != "":
             paymentTypeObj = PaymentTermsTypes.objects.filter(GroupNumber = paymentType)
             paymentjson = PaymentTermsTypesSerializer(paymentTypeObj, many = True)
             finalBpData['PayTermsGrpCode'] = json.loads(json.dumps(paymentjson.data))
         else:
             finalBpData['PayTermsGrpCode'] = []
             
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if Employee.objects.filter(SalesEmployeeCode = salesPersonType).exists():
+        if salesPersonType != "":
             salesPersonObj = Employee.objects.filter(SalesEmployeeCode = salesPersonType).values("id","SalesEmployeeName", "SalesEmployeeCode")
             salesjson = EmployeeSerializer(salesPersonObj, many =True)
             finalBpData['SalesPersonCode'] = json.loads(json.dumps(salesjson.data))
         else:
             finalBpData['SalesPersonCode'] = []
         
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if Employee.objects.filter(SalesEmployeeCode = createdBy).exists():
+        if createdBy != "":
             salesPersonObj = Employee.objects.filter(SalesEmployeeCode = createdBy).values("id","SalesEmployeeName", "SalesEmployeeCode")
             salesjson = EmployeeSerializer(salesPersonObj, many =True)
             finalBpData['CreatedBy'] = json.loads(json.dumps(salesjson.data))
         else:
             finalBpData['CreatedBy'] = []
         
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         #print("cardCodeType: ", cardCodeType)
-        if BPEmployee.objects.filter(U_BPID = obj.id).exists():
+        if cardCodeType != "":
             cardObj = BPEmployee.objects.filter(U_BPID = obj.id).values("id","FirstName", "CardCode", "InternalCode", "MobilePhone", "E_Mail")
             cardjson = BPEmployeeSerializer(cardObj, many = True)
             finalBpData['ContactEmployees'] = json.loads(json.dumps(cardjson.data))
         else:
             finalBpData['ContactEmployees'] = []
             
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if BPAddresses.objects.filter(BPID=obj.id).exists():
+        if cardCodeType != "":
             bpaddr = BPAddresses.objects.filter(BPID=obj.id)
             bpaddr_json = BPAddressesSerializer(bpaddr, many=True)
             jss0 = json.loads(json.dumps(bpaddr_json.data))
@@ -658,9 +658,8 @@ def showBP(objs):
             finalBpData['BPAddresses'] = jss0 + jss1
         else:
             finalBpData['BPAddresses'] = []
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        
         allbp.append(finalBpData)
-        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     return allbp
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -1624,35 +1623,24 @@ def ledger_dashboard(request):
         return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount})
     except Exception as e:
         return Response({"message": str(e),"status": 201,"data":[]})
-
-# bp list with total purchase
-# from django.db import connection as db_connection
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @api_view(['POST'])
-def receivable_dashboard(request):
+def filter_receivable_dashboard(request):
     try:
-        Filter = request.data['Filter']
-        Code = request.data['Code']
-        SalesType = request.data['Type']
-        FromDate = str(request.data['FromDate'])
-        ToDate = str(request.data['ToDate'])
-
-        # print(FromDate, ToDate)
-        
-        SalesPersonCode = -1
-        if 'SalesPersonCode' in request.data:
-            SalesPersonCode = request.data['SalesPersonCode']
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        SalesPersonCode = request.data['SalesPersonCode']
+        Filter        = request.data['Filter']
+        FromDate      = str(request.data['FromDate'])
+        ToDate        = str(request.data['ToDate'])
+        DueDaysGroup  = request.data['DueDaysGroup']
+        SearchText    = request.data['SearchText']
+        OrderByName   = str(request.data['OrderByName']).strip()
+        OrderByAmt    = str(request.data['OrderByAmt']).strip()
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         zones = getZoneByEmployee(SalesPersonCode)
-        print(zones)
-        SearchText = ""
-        if 'SearchText' in request.data:
-            SearchText = request.data['SearchText']
-
-        OrderByName = "" #a-z/z-a
-        OrderByAmt = "" #desc
-        if 'OrderByName' in request.data:
-            OrderByName = str(request.data['OrderByName']).strip()
-        if 'OrderByAmt' in request.data:
-            OrderByAmt = str(request.data['OrderByAmt']).strip()
+        zonesStr = "','".join(zones)
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         orderby = ""
         if str(OrderByName).lower() == 'a-z':
@@ -1665,19 +1653,13 @@ def receivable_dashboard(request):
             orderby = "Order By TotalPending desc"
         else:
             orderby = "Order By DocDate asc"
-
+        # endElse
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        DueDaysGroup = ''
-        if 'DueDaysGroup' in request.data:
-            DueDaysGroup = request.data['DueDaysGroup']
-
-        # endif
         overDuesQuery = ""
         if DueDaysGroup != "":
             overDuesQuery = f"AND DueDaysGroup = '{DueDaysGroup}'"
-    
+        # endIf
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
         limitQuery = ""
         if 'PageNo' in request.data:
             PageNo = int(request.data['PageNo'])
@@ -1688,7 +1670,146 @@ def receivable_dashboard(request):
                 startWith = (endWith - size)
                 # dataContext = dataContext[startWith:endWith]
                 limitQuery = f"Limit {startWith}, {MaxSize}"
-        
+            # endIf
+        # endIf
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        groupByQuery = "CardCode"
+        SearchQuery = ""
+        fieldsNamesForQuery = "CardCode as GroupCode, CardName as GroupName,"
+        selectGroupField = ""
+        if str(Filter).lower() == 'group':
+            groupByQuery = "GroupCode"
+            fieldsNamesForQuery = "GroupCode, GroupName,"
+            if str(SearchText) != '':
+                SearchQuery = f"AND (GroupCode like '%%{SearchText}%%')"
+        elif str(Filter).lower() == 'zone':
+            groupByQuery = "U_U_UTL_Zone"
+            fieldsNamesForQuery = "U_U_UTL_Zone as GroupCode, U_U_UTL_Zone as GroupName,"
+            if str(SearchText) != '':
+                SearchQuery = f"AND (U_U_UTL_Zone like '%%{SearchText}%%')"
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mydb = mysql.connector.connect(host = settings.DATABASES['default']['HOST'], user = settings.DATABASES['default']['USER'], password = settings.DATABASES['default']['PASSWORD'], database = settings.DATABASES['default']['NAME'] )
+        mycursor = mydb.cursor(dictionary=True, buffered=True)
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        receiableData = []
+        sqlQuery = f"""
+            SELECT
+                {fieldsNamesForQuery}
+                SUM(TotalDue) AS TotalPending
+            FROM BusinessPartner_receivable
+            WHERE
+                CronUpdateCount =(SELECT MAX(CronUpdateCount) FROM BusinessPartner_receivable) - 1
+                AND U_U_UTL_Zone IN('{zonesStr}')
+                {SearchQuery}
+                {overDuesQuery}
+            GROUP BY {groupByQuery}
+            {orderby}
+            {limitQuery};
+        """
+
+        print(sqlQuery)
+        mycursor.execute(sqlQuery)
+        receiableData = mycursor.fetchall()
+
+        dataContext = []
+        totalSales = 0
+        totalPayments = 0
+        totalPendings = 0
+        # for one bp Receipt and Pending
+        totalPaybal = 0
+        print(">>>>>> No of Objs", len(receiableData))
+        for groupObj in receiableData:
+            GroupCode     = groupObj['GroupCode']
+            GroupName     = groupObj['GroupName']
+            DocTotal      = groupObj['TotalPending']
+            PaidToDateSys = groupObj['TotalPending']
+            TotalPending  = groupObj['TotalPending']
+
+            bpData = {
+                "GroupName": GroupName,
+                "GroupCode": GroupCode,
+                "TotalSales": round(TotalPending, 2)
+            }
+            dataContext.append(bpData)
+            totalSales = float(totalSales) + float(DocTotal)
+            totalPayments = float(totalPayments) + float(PaidToDateSys)
+            totalPendings = float(totalPendings) + float(TotalPending)
+
+
+        TotalSales = totalSales
+        TotalReceivePayment = round(totalPayments, 2)
+        DifferenceAmount = round(float(totalPendings), 2)
+        # DifferenceAmount = round(float(float(TotalSales) - float(allPayment)), 2)
+
+        return Response({"message": "Success","status": 200, "data":dataContext, "TotalSales": TotalSales, "TotalReceivePayment": TotalReceivePayment, "DifferenceAmount": DifferenceAmount})
+    
+    except Exception as e:
+        return Response({"message": str(e),"status": 201,"data":[]})
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+@api_view(['POST'])
+def receivable_dashboard(request):
+    try:
+        Filter = request.data['Filter']
+        Code = request.data['Code']
+        SalesType = request.data['Type']
+        FromDate = str(request.data['FromDate'])
+        ToDate = str(request.data['ToDate'])
+
+        SalesPersonCode = -1
+        if 'SalesPersonCode' in request.data:
+            SalesPersonCode = request.data['SalesPersonCode']
+        zones = getZoneByEmployee(SalesPersonCode)
+        print(zones)
+        SearchText = ""
+        if 'SearchText' in request.data:
+            SearchText = request.data['SearchText']
+        # endIf
+        OrderByName = "" #a-z/z-a
+        OrderByAmt = "" #desc
+        if 'OrderByName' in request.data:
+            OrderByName = str(request.data['OrderByName']).strip()
+        # endIf
+        if 'OrderByAmt' in request.data:
+            OrderByAmt = str(request.data['OrderByAmt']).strip()
+        # endIf
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        orderby = ""
+        if str(OrderByName).lower() == 'a-z':
+            orderby = "Order By CardName asc"
+        elif str(OrderByName).lower() == 'z-a':
+            orderby = "Order By CardName desc"
+        elif str(OrderByAmt).lower() == 'asc':
+            orderby = "Order By TotalPending asc"
+        elif str(OrderByAmt).lower() == 'desc':
+            orderby = "Order By TotalPending desc"
+        else:
+            orderby = "Order By DocDate asc"
+        # endElse
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        DueDaysGroup = ''
+        if 'DueDaysGroup' in request.data:
+            DueDaysGroup = request.data['DueDaysGroup']
+        # endIf
+        overDuesQuery = ""
+        if DueDaysGroup != "":
+            overDuesQuery = f"AND DueDaysGroup = '{DueDaysGroup}'"
+        # endIf
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        limitQuery = ""
+        if 'PageNo' in request.data:
+            PageNo = int(request.data['PageNo'])
+            MaxSize = request.data['MaxSize']
+            if str(MaxSize).lower() != "all":   
+                size = int(MaxSize)
+                endWith = (PageNo * size)
+                startWith = (endWith - size)
+                # dataContext = dataContext[startWith:endWith]
+                limitQuery = f"Limit {startWith}, {MaxSize}"
+            # endIf
+        # endIf
+        # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         cardCodesList = []
         if str(Filter).lower() == 'group':
             cardCodesList = list(BusinessPartner.objects.filter(Q(GroupCode = Code, U_U_UTL_Zone__in = zones) & Q( Q(CardCode__icontains = SearchText) | Q(CardName__icontains = SearchText))).values_list("CardCode", flat=True))
@@ -1725,7 +1846,7 @@ def receivable_dashboard(request):
         totalPaybal = 0
         print(">>>>>> No of Objs", len(receiableData))
         for obj in receiableData:
-            print("CardCode", obj['CardCode'])
+            # print("CardCode", obj['CardCode'])
             CardCode        = obj['CardCode']
             CardName        = obj['CardName']
             PendingTotal    = round(float(obj['TotalPending']), 2)

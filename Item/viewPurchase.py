@@ -614,15 +614,15 @@ def ap_sub_category_items_dashboard(request):
 
         orderby = ""
         if str(OrderByName).lower() == 'a-z':
-            orderby = "Order By Item_item asc"
+            orderby = "Order By Item_item.U_UTL_ITSBG asc"
         elif str(OrderByName).lower() == 'z-a':
-            orderby = "Order By Item_item desc"
+            orderby = "Order By Item_item.U_UTL_ITSBG desc"
         elif str(OrderByAmt).lower() == 'asc':
             orderby = "Order By LineTotal asc"
         elif str(OrderByAmt).lower() == 'desc':
             orderby = "Order By LineTotal desc"
         else:
-            orderby = "Order By Item_item asc"
+            orderby = "Order By Item_item.U_UTL_ITSBG asc"
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         fromToDate = ""
         if str(FromDate) != "":
@@ -1103,7 +1103,7 @@ def ap_item_overview(request):
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @api_view(["POST"])
-def ap_bp_item_invoices(request):
+def ap_item_invoices(request):
     try:
         print("item_invoices", request.data)
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -1273,7 +1273,7 @@ def ap_bp_item_invoices(request):
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 @api_view(["POST"])
-def ap_item_invoices(request):
+def ap_bp_item_invoices(request):
     try:
         allItems = []
         CardCode = request.data['CardCode']

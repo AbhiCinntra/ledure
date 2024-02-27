@@ -668,10 +668,10 @@ def purchase_ledger_dashboard_count(request):
         SearchText  = request.data['SearchText']
         DueDaysGroup = request.data['DueDaysGroup']
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        zones = getZoneByEmployee(SalesPersonCode)
         if Code!="":
             zonesStr = str(Code)
         else:
-            zones = getZoneByEmployee(SalesPersonCode)
             zonesStr = "','".join(zones)
         # zones = getZoneByEmployee(SalesPersonCode)
         # zonesStr = "','".join(zones)
@@ -820,7 +820,7 @@ def purchase_ledger_dashboard_count(request):
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         # Total Receivables 
         # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        sqlPendingSales = f""" SELECT id, SUM(`TotalDue`) as TotalPending FROM `BusinessPartner_receivable` WHERE CardCode IN('{CardCodeStr}') AND `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_receivable) - 1 {overDuesQuery} """
+        sqlPendingSales = f""" SELECT id, SUM(`TotalDue`) as TotalPending FROM `BusinessPartner_payable` WHERE CardCode IN('{CardCodeStr}') AND `CronUpdateCount` = (SELECT MAX(`CronUpdateCount`) FROM BusinessPartner_payable) - 1 {overDuesQuery} """
         print(sqlPendingSales)
         mycursor.execute(sqlPendingSales)
         allPendingData = mycursor.fetchall()

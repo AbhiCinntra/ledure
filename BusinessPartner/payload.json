@@ -13,6 +13,17 @@
     "SearchText": "",
     "FromDate": "",
     "ToDate": "",
+    "PageNo": 1,
+    "MaxSize": "10",
+    "CardType": "cSupplier" #
+}
+
+{
+    "SearchText": "",
+    "SalesPersonCode": "-1",
+    "PageNo": 1,
+    "MaxSize": "10",
+    "CardType": "cCustomer" #cSupplier
 }
 
 {

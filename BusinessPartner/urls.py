@@ -12,6 +12,9 @@ urlpatterns = [
     path('businesspartner/all_filter', all_filter),
     path('businesspartner/update_lat_long', update_lat_long),
 
+    # for dms
+    path('businesspartner/verify_distributor', verify_distributor),
+
     path('businesspartner/syncbp', syncBP),
     
     # BP Branch
@@ -69,15 +72,17 @@ urlpatterns = [
     path('businesspartner/bp_overview', bp_overview),
 
     # new url
+    path('businesspartner/filter_ledger_dashboard', filter_ledger_dashboard),
+    path('businesspartner/ledger_dashboard_count', ledger_dashboard_count),
     path('businesspartner/ledger_dashboard', ledger_dashboard),
     path('businesspartner/bp_ledger', bp_ledger),
+
+    path('businesspartner/filter_receivable_dashboard', filter_receivable_dashboard),
     path('businesspartner/receivable_dashboard', receivable_dashboard),
     path('businesspartner/bp_receivable', bp_receivable),
+
     path('businesspartner/receipt_dashboard', receipt_dashboard),
     path('businesspartner/bp_receipt', bp_receipt),
-    path('businesspartner/filter_ledger_dashboard', filter_ledger_dashboard),
-    path('businesspartner/filter_receivable_dashboard', filter_receivable_dashboard),
-    path('businesspartner/ledger_dashboard_count', ledger_dashboard_count),
     
     # purchase invoices 
     path('businesspartner/bp_purchase_invoices', bp_purchase_invoices),
@@ -87,20 +92,24 @@ urlpatterns = [
     path('businesspartner/monthly_receipts_chart', monthly_receipts_chart),
     path('businesspartner/monthly_receivable_chart', monthly_receivable_chart),
     path('businesspartner/monthly_pending_chart', monthly_pending_chart),
-
-    path('businesspartner/due_payment_dashboard_count', due_payment_dashboard_count),
-    path('businesspartner/due_payment_dashboard', due_payment_dashboard),
-    path('businesspartner/filter_due_payment_dashboard', filter_due_payment_dashboard),
-    path('businesspartner/bp_due_payment', bp_due_payment),
     path('businesspartner/monthly_receivable_group_chart', monthly_receivable_group_chart),
     path('businesspartner/monthly_receivable_group_chart_filter', monthly_receivable_group_chart_filter),
+
+    # new urls
+    path('businesspartner/filter_due_payment_dashboard', filter_due_payment_dashboard),
+    path('businesspartner/due_payment_dashboard_count', due_payment_dashboard_count),
+    path('businesspartner/due_payment_dashboard', due_payment_dashboard),
+    path('businesspartner/bp_due_payment', bp_due_payment),
 
     #Payable API's
     path('businesspartner/filter_payable_dashboard', filter_payable_dashboard),
     path('businesspartner/payable_dashboard', payable_dashboard),
     path('businesspartner/bp_payable', bp_payable),
+
+    path('businesspartner/filter_due_payable_payment_dashboard', filter_due_payable_payment_dashboard),
     path('businesspartner/due_payable_payment_dashboard_count', due_payable_payment_dashboard_count),
     path('businesspartner/due_payable_payment_dashboard', due_payable_payment_dashboard),
+    path('businesspartner/bp_payable_due_payment', bp_payable_due_payment),
 
     #Purchase Chart API's
     path('businesspartner/monthly_purchase_chart', monthly_purchase_chart),
@@ -108,5 +117,6 @@ urlpatterns = [
     path('businesspartner/monthly_payable_chart', monthly_payable_chart),
     path('businesspartner/monthly_pending_purchase_chart', monthly_pending_purchase_chart),
     path('businesspartner/monthly_payable_group_chart', monthly_payable_group_chart),
+    path('businesspartner/monthly_payable_group_chart_filter', monthly_payable_group_chart_filter),
 
 ]
